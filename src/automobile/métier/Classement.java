@@ -1,4 +1,5 @@
-package automobile.metier;
+package automobile.métier;
+
 
 import java.math.BigDecimal;
 

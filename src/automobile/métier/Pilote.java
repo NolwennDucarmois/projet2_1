@@ -1,4 +1,4 @@
-package automobile.metier;
+package automobile.métier;
 
 import java.time.LocalDate;
 public class Pilote {
@@ -7,13 +7,13 @@ public class Pilote {
     protected String nom;
     protected String prenom;
     protected LocalDate dateNaiss;
-    protected automobile.metier.Pays pays;
+    protected Pays pays;
 
     public Pilote(){
 
     }
 
-    public Pilote(int idPilote, String matricule, String nom, String prenom, LocalDate dateNaiss, automobile.metier.Pays pays) {
+    public Pilote(int idPilote, String matricule, String nom, String prenom, LocalDate dateNaiss, Pays pays) {
         this.idPilote = idPilote;
         this.matricule = matricule;
         this.nom = nom;
@@ -62,11 +62,11 @@ public class Pilote {
         this.dateNaiss = dateNaiss;
     }
 
-    public automobile.metier.Pays getPays() {
+    public Pays getPays() {
         return pays;
     }
 
-    public void setPays(automobile.metier.Pays pays) {
+    public void setPays(Pays pays) {
         this.pays = pays;
     }
 }

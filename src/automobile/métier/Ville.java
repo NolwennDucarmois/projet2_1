@@ -1,15 +1,16 @@
-package automobile.metier;
+package automobile.métier;
+
 
 public class Ville {
     protected int idVille;
     protected String nom;
     protected double latitude;
     protected double longitude;
-    protected automobile.metier.Pays pays;
+    protected Pays pays;
     public Ville(){
 
     }
-    public Ville(int idVille, String nom, double latitude, double longitude, automobile.metier.Pays pays){
+    public Ville(int idVille, String nom, double latitude, double longitude, Pays pays){
         this.idVille=idVille;
         this.nom=nom;
         this.latitude=latitude;
@@ -49,11 +50,11 @@ public class Ville {
         this.longitude = longitude;
     }
 
-    public automobile.metier.Pays getPays() {
+    public Pays getPays() {
         return pays;
     }
 
-    public void setPays(automobile.metier.Pays pays) {
+    public void setPays(Pays pays) {
         this.pays = pays;
     }
 }

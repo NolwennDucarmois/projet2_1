@@ -1,4 +1,5 @@
-package automobile.metier;
+package automobile.métier;
+
 
 
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ public class Course {
     protected LocalDate dateCourse;
     protected int km;
     protected Ville ville;
-    protected List<automobile.metier.Classement> listClassement = new ArrayList<>();
+    protected List<Classement> listClassement = new ArrayList<>();
 
     public Course(){
 
@@ -75,11 +76,11 @@ public class Course {
         this.ville = ville;
     }
 
-    public List<automobile.metier.Classement> getListClassement() {
+    public List<Classement> getListClassement() {
         return listClassement;
     }
 
-    public void setListClassement(List<automobile.metier.Classement> listClassement) {
+    public void setListClassement(List<Classement> listClassement) {
         this.listClassement = listClassement;
     }
     public void listePilotesPlaceGain(){
@@ -102,11 +103,11 @@ public class Course {
 
         listClassement.remove(pilote);
     }
-    public void resultat(Pilote pilote, automobile.metier.Classement place, automobile.metier.Classement gain){
+    public void resultat(Pilote pilote, Classement place, Classement gain){
         // enregistrer un pilote à une course quand il est inscrit
         // màj du classement en fait
     }
-    public void modif(Pilote pilote, automobile.metier.Classement place, automobile.metier.Classement gain){
+    public void modif(Pilote pilote, Classement place, Classement gain){
         // changer la place si contestation
     }
     public void listePilotesDuPays(){
