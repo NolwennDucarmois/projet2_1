@@ -83,25 +83,44 @@ public class Course {
     public void setListClassement(List<Classement> listClassement) {
         this.listClassement = listClassement;
     }
+
     public void listePilotesPlaceGain(){
         // tous les coureurs participer à la course + place + gain
     }
     public void gainTotal(){
         // total de tous les gains pour la course
+        BigDecimal total = new BigDecimal(0);
+        for (Classement c : listClassement){
+            total.add(c.gain);
+        }
+        //System.out.println("Gain total de la course "+nom+" : "+total);
     }
     public void listePaysPilotes(){
-        //
+        // tous les pays qui proviennent des pilotes (1 seule fois)
+        // trouver les pilotes qui participent à la course et prendre leur pays
+        List<ListePilotePays> liste= new ArrayList<>();
     }
     public void vainqueur(){
         // meilleur place
+        Pilote p = null;
+        for (Classement c : listClassement){
+            if(c.place == 1){
+                p = c.pilote;
+                break;
+            }
+        }
+        //System.out.println("Vainqueur de la course "+nom+" : "+p);
     }
     public void addPilote(Pilote pilote){
 
     }
     public void supPilote(Pilote pilote){
         // chercher le pilote dans le classement
-
-        listClassement.remove(pilote);
+        for (Classement c : listClassement){
+            if(c.pilote==pilote){
+                listClassement.remove(c.pilote);
+            }
+        }
     }
     public void resultat(Pilote pilote, Classement place, Classement gain){
         // enregistrer un pilote à une course quand il est inscrit
@@ -111,14 +130,13 @@ public class Course {
         // changer la place si contestation
     }
     public void listePilotesDuPays(){
-
+        // liste pilotes d'on le pays et le meme que la course
     }
     public boolean classementComplet(){
         // est-ce que pour tous les coureurs inscrit à la course il y a un classement
         return true;
     }
 }
-
 
 // Liste CoursetHeure
 //List<?>

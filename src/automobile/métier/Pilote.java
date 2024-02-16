@@ -69,4 +69,16 @@ public class Pilote {
     public void setPays(Pays pays) {
         this.pays = pays;
     }
+
+    @Override
+    public String toString() {
+        return "Pilote{" +
+                "idPilote=" + idPilote +
+                ", matricule='" + matricule + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", dateNaiss=" + dateNaiss +
+                ", pays=" + pays +
+                '}';
+    }
 }
