@@ -1,8 +1,6 @@
 package automobile.métier;
 
-
 import java.math.BigDecimal;
-
 
 public class Classement {
     protected int idClassement;

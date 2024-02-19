@@ -1,7 +1,5 @@
 package automobile.métier;
 
-
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -85,22 +83,32 @@ public class Course {
     }
 
     public void listePilotesPlaceGain(){
-        // tous les coureurs participer à la course + place + gain
+        //TODO classe listePilotesPlaceGain()
+        // tous les coureurs qui participee à la course + place + gain
+
     }
-    public void gainTotal(){
+
+    public BigDecimal gainTotal(){
         // total de tous les gains pour la course
         BigDecimal total = new BigDecimal(0);
         for (Classement c : listClassement){
             total.add(c.gain);
         }
-        //System.out.println("Gain total de la course "+nom+" : "+total);
+        return total;
     }
-    public void listePaysPilotes(){
-        // tous les pays qui proviennent des pilotes (1 seule fois)
+    public List<Pays> listePaysPilotes(){
+        // tous les pays des pilotes (1 seule fois)
         // trouver les pilotes qui participent à la course et prendre leur pays
-        List<ListePilotePays> liste= new ArrayList<>();
+        List<Pays> liste= new ArrayList<>();
+        for(Classement c : listClassement){
+            Pays pays = c.getPilote().getPays();
+            if (!liste.contains(pays)) {
+                liste.add(pays);
+            }
+        }
+        return liste;
     }
-    public void vainqueur(){
+    public Pilote vainqueur(){
         // meilleur place
         Pilote p = null;
         for (Classement c : listClassement){
@@ -109,10 +117,10 @@ public class Course {
                 break;
             }
         }
-        //System.out.println("Vainqueur de la course "+nom+" : "+p);
+        return p;
     }
     public void addPilote(Pilote pilote){
-
+        //TODO classe addPilote()
     }
     public void supPilote(Pilote pilote){
         // chercher le pilote dans le classement
@@ -123,23 +131,29 @@ public class Course {
         }
     }
     public void resultat(Pilote pilote, Classement place, Classement gain){
+        //TODO classe resultat()
         // enregistrer un pilote à une course quand il est inscrit
         // màj du classement en fait
     }
     public void modif(Pilote pilote, Classement place, Classement gain){
+        //TODO classe modif()
         // changer la place si contestation
     }
-    public void listePilotesDuPays(){
+    public List<Pilote> listePilotesDuPays(){
         // liste pilotes d'on le pays et le meme que la course
+        Pays course = ville.getPays();
+        List<Pilote> liste= new ArrayList<>();
+        for(Classement c : listClassement) {
+            Pays pays = c.getPilote().getPays();
+            if (course.equals(pays)){
+                liste.add(c.getPilote());
+            }
+        }
+        return liste;
     }
     public boolean classementComplet(){
+        //TODO classe classementComplet()
         // est-ce que pour tous les coureurs inscrit à la course il y a un classement
         return true;
     }
 }
-
-// Liste CoursetHeure
-//List<?>
-// classe CoursetHeure
-// #cours
-// #heure

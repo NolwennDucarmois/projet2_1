@@ -1,6 +1,5 @@
 package automobile.métier;
 
-
 public class Ville {
     protected int idVille;
     protected String nom;
