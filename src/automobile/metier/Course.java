@@ -1,4 +1,4 @@
-package automobile.métier;
+package automobile.metier;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

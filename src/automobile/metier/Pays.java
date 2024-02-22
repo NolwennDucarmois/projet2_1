@@ -1,4 +1,4 @@
-package automobile.métier;
+package automobile.metier;
 
 import java.util.ArrayList;
 import java.util.List;

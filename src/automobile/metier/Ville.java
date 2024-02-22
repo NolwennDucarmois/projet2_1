@@ -1,4 +1,4 @@
-package automobile.métier;
+package automobile.metier;
 
 /**
  * classe métier de gestion d'une ville
