@@ -3,7 +3,6 @@ package automobile.métier;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
  */
 public class Course {
     /**
-     * compteur d'incrémentation pour l'identifiant idCourse
+     * compteur d'incrementation pour l'identifiant idCourse
      */
     protected static int id_act = 1;
     /**
@@ -29,7 +28,7 @@ public class Course {
      */
     protected BigDecimal priceMoney;
     /**
-     * date où la course se deroule
+     * date ou la course se deroule
      */
     protected LocalDate dateCourse;
     /**
@@ -37,7 +36,7 @@ public class Course {
      */
     protected int km;
     /**
-     * ville où se déroule la course
+     * ville où se deroule la course
      */
     protected Ville ville;
     /**
@@ -50,19 +49,19 @@ public class Course {
     protected List<ListePilotesPlaceGain> listePilotesPlaceGains = new ArrayList<>();
 
     /**
-     * constructeur par défaut
+     * constructeur par defaut
      */
     public Course() {
 
     }
 
     /**
-     * constructeur paramétré
+     * constructeur parametre
      * @param nom        nom de la course
      * @param priceMoney priceMoney de la course
      * @param dateCourse date de quand se déroule la course
      * @param km         km total de la course
-     * @param ville      ville où se déroule la course
+     * @param ville      ville ou se déroule la course
      */
     public Course(String nom, BigDecimal priceMoney, LocalDate dateCourse, int km, Ville ville) {
         this.idCourse = id_act++;
@@ -155,7 +154,7 @@ public class Course {
 
     /**
      * getter ville
-     * @return ville où se déroule la course
+     * @return ville ou se déroule la course
      */
     public Ville getVille() {
         return ville;
@@ -202,7 +201,8 @@ public class Course {
     }
 
     /**
-     * méthode d'affichage
+     * methode d'affichage de toutes les infos de l'objet de la classe Course
+     * @return toutes les infos sur l'objet
      */
     @Override
     public String toString() {
@@ -218,18 +218,20 @@ public class Course {
                 '}';
     }
 
+    /**
+     * methode qui affiche tous les coureurs qui participent à une course avec leur position et leur gain
+     */
     public void listePilotesPlaceGain() {
-        // tous les coureurs qui participe à la course + place + gain
         for (Classement c : listClassement) {
             listePilotesPlaceGains.add(new ListePilotesPlaceGain(c.pilote, c.place, c.gain));
         }
-        for (int i = 0; i < listePilotesPlaceGains.size(); i++) {
-            System.out.println(listePilotesPlaceGains.get(i));
-        }
     }
 
+    /**
+     * methode qui calcule la somme des gains au total de la course
+     * @return total retourne le total des gains
+     */
     public BigDecimal gainTotal() {
-        // total de tous les gains pour la course
         BigDecimal total = new BigDecimal(0);
         for (Classement c : listClassement) {
             total.add(c.gain);
@@ -237,9 +239,11 @@ public class Course {
         return total;
     }
 
+    /**
+     * methode qui cherche tous les pays des pilotes qui participent à la course et les stocke 1 seule fois
+     * @return liste la liste des pays
+     */
     public List<Pays> listePaysPilotes() {
-        // tous les pays des pilotes (1 seule fois)
-        // trouver les pilotes qui participent à la course et prendre leur pays
         List<Pays> liste = new ArrayList<>();
         for (Classement c : listClassement) {
             Pays pays = c.pilote.pays;
@@ -250,8 +254,11 @@ public class Course {
         return liste;
     }
 
+    /**
+     * methode qui chercher le vainqueur de la course
+     * @return p le pilote vainqueur
+     */
     public Pilote vainqueur() {
-        // meilleur place
         Pilote p = null;
         for (Classement c : listClassement) {
             if (c.place == 1) {
@@ -262,13 +269,20 @@ public class Course {
         return p;
     }
 
+    /**
+     * methode qui permet d'ajouter un pilote à la liste des participants
+     * @param pilote le pilote à ajouter à la course
+     */
     public void addPilote(Pilote pilote) {
         Classement ajout = new Classement();
         ajout.setPilote(pilote);
     }
 
+    /**
+     * methode qui supprime un pilote de la liste des participants à une course
+     * @param pilote le pilote à supprimer de la course
+     */
     public void supPilote(Pilote pilote) {
-        // chercher le pilote dans le classement
         for (Classement c : listClassement) {
             if (c.pilote == pilote) {
                 listClassement.remove(c.pilote);
@@ -276,14 +290,24 @@ public class Course {
         }
     }
 
+    /**
+     * methode qui affiche le pilote dans le classement
+     * @param pilote pilote à afficher
+     * @param place place du pilote
+     * @param gain gain du pilote
+     */
     public void resultat(Pilote pilote, int place, BigDecimal gain) {
-        //TODO classe resultat()
-        // enregistrer un pilote à une course quand il est inscrit
-        // màj du classement en fait
+        System.out.println(place+" "+pilote.nom+" "+pilote.prenom+" "+gain);
+
     }
 
+    /**
+     * methode qui modifie la place et le gain d'un pilote si il y a contestation lors du classement de la course
+     * @param pilote le pilote pour lequel on modifie
+     * @param place  la nouvelle place du pilote
+     * @param gain   le nouveau gain du pilote après contestation
+     */
     public void modif(Pilote pilote, int place, BigDecimal gain) {
-        // changer la place si contestation
         for (Classement c : listClassement) {
             if (c.pilote.equals(pilote)) {
                 c.setPlace(place);
@@ -293,8 +317,11 @@ public class Course {
         }
     }
 
+    /**
+     * methode qui cherche les pilotes ayant comme nationalite la même que celle ou se déroule la course
+     * @return liste la liste des pilotes
+     */
     public List<Pilote> listePilotesDuPays() {
-        // liste pilotes d'on le pays et le meme que la course
         Pays course = ville.pays;
         List<Pilote> liste = new ArrayList<>();
         for (Classement c : listClassement) {
@@ -306,8 +333,11 @@ public class Course {
         return liste;
     }
 
+    /**
+     * methode qui retourne un boolean en fonction de si tous les pilotes inscrit à la course sont dans le classement
+     * @return true | false
+     */
     public boolean classementComplet() {
-        // est-ce que un pilote inscrit est bien dans le classement
         for (Classement c : listClassement) {
             if (c.pilote == null) {
                 return false;

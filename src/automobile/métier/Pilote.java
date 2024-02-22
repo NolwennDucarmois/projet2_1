@@ -9,7 +9,7 @@ import java.time.LocalDate;
  */
 public class Pilote {
     /**
-     * compteur d'incrémentation pour l'identifiant idPilote
+     * compteur d'incrementation pour l'identifiant idPilote
      */
     protected static int id_act = 1;
     /**
@@ -45,7 +45,7 @@ public class Pilote {
     }
 
     /**
-     * constructeur paramétré
+     * constructeur parametre
      * @param matricule matricule du pilote
      * @param nom       nom du pilote
      * @param prenom    prenom du pilote
@@ -158,7 +158,8 @@ public class Pilote {
     }
 
     /**
-     * méthode d'affichage
+     * methode d'affichage de toutes les infos de l'objet de la classe Pilote
+     * @return toutes les infos sur l'objet
      */
     @Override
     public String toString() {

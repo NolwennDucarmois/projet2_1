@@ -89,7 +89,8 @@ public class ListePilotesPlaceGain {
     }
 
     /**
-     * méthode d'affichage
+     * methode d'affichage de toutes les infos de l'objet de la classe ListePilotesPlaceGain
+     * @return toutes les infos sur l'objet
      */
     @Override
     public String toString() {

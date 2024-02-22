@@ -7,7 +7,7 @@ package automobile.métier;
  */
 public class Ville {
     /**
-     * compteur d'incrémentation pour l'identifiant idVille
+     * compteur d'incrementation pour l'identifiant idVille
      */
     protected static int id_act = 1;
     /**
@@ -134,7 +134,8 @@ public class Ville {
     }
 
     /**
-     * méthode d'affichage
+     * methode d'affichage de toutes les infos de l'objet de la classe Ville
+     * @return toutes les infos sur l'objet
      */
     @Override
     public String toString() {

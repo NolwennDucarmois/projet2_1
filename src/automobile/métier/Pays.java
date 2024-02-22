@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Pays {
     /**
-     * compteur d'incrémentation pour l'identifiant idPays
+     * compteur d'incrementation pour l'identifiant idPays
      */
     protected static int id_act = 1;
     /**
@@ -45,7 +45,7 @@ public class Pays {
      * constructeur parametre
      * @param sigle  sigle du pays
      * @param nom    nom du pays
-     * @param langue langue parlée dans le pays
+     * @param langue langue parlee dans le pays
      */
     public Pays(String sigle, String nom, String langue) {
         this.idPays = id_act++;
@@ -104,7 +104,7 @@ public class Pays {
 
     /**
      * getter langue
-     * @return langue parlée dans le pays
+     * @return langue parlee dans le pays
      */
     public String getLangue() {
         return langue;
@@ -135,7 +135,8 @@ public class Pays {
     }
 
     /**
-     * méthode d'affichage
+     * methode d'affichage de toutes les infos de l'objet de la classe Pays
+     * @return toutes les infos sur l'objet
      */
     @Override
     public String toString() {

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  */
 public class Classement {
     /**
-     * compteur d'incrémentation pour l'identifiant idClassement
+     * compteur d'incrementation pour l'identifiant idClassement
      */
     protected static int id_act = 1;
     /**
@@ -38,9 +38,9 @@ public class Classement {
 
     /**
      * constructeur parametre
-     * @param place        place dans le classement
-     * @param gain         gain obtenu du classement
-     * @param pilote       pilote du classement
+     * @param place     place dans le classement
+     * @param gain      gain obtenu du classement
+     * @param pilote    pilote du classement
      */
     public Classement(int place, BigDecimal gain, Pilote pilote) {
         this.idClassement = id_act++;
@@ -114,7 +114,8 @@ public class Classement {
     }
 
     /**
-     * méthode d'affichage automatique
+     * methode d'affichage de toutes les infos de l'objet de la classe Classement
+     * @return toutes les infos sur l'objet
      */
     @Override
     public String toString() {
