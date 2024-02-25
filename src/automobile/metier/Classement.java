@@ -1,6 +1,7 @@
 package automobile.metier;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * classe métier de gestion d'un classement
@@ -125,5 +126,25 @@ public class Classement {
                 ", gain=" + gain +
                 ", pilote=" + pilote +
                 '}';
+    }
+    /**
+     * méthode pour comparer que 2 objets sont égales par leur identifiant unique
+     * @param o l'objet Classement qu'on compare
+     * @return true | false selon que c'est égale ou non
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Classement that = (Classement) o;
+        return idClassement == that.idClassement;
+    }
+    /**
+     * méthode qui retourne une valeur sur idClassement
+     * @return la valeur
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(idClassement);
     }
 }

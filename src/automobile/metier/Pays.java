@@ -2,6 +2,7 @@ package automobile.metier;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * classe métier de gestion d'un pays
@@ -147,5 +148,25 @@ public class Pays {
                 ", langue='" + langue + '\'' +
                 ", listPilote=" + listPilote +
                 '}';
+    }
+    /**
+     * méthode pour comparer que 2 objets sont égales par leur identifiant unique
+     * @param o l'objet Pays qu'on compare
+     * @return true | false selon que c'est égale ou non
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pays pays = (Pays) o;
+        return idPays == pays.idPays;
+    }
+    /**
+     * méthode qui retourne une valeur sur idPays
+     * @return la valeur
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(idPays);
     }
 }

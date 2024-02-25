@@ -1,6 +1,7 @@
 package automobile.metier;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * classe métier de gestion d'un pilote
@@ -171,5 +172,25 @@ public class Pilote {
                 ", dateNaiss=" + dateNaiss +
                 ", pays=" + pays +
                 '}';
+    }
+    /**
+     * méthode pour comparer que 2 objets sont égales par leur identifiant unique
+     * @param o l'objet Pilote qu'on compare
+     * @return true | false selon que c'est égale ou non
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pilote pilote = (Pilote) o;
+        return idPilote == pilote.idPilote;
+    }
+    /**
+     * méthode qui retourne une valeur sur idPilote
+     * @return la valeur
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(idPilote);
     }
 }

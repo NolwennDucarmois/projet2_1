@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * classe métier de gestion d'une course
@@ -217,6 +218,26 @@ public class Course {
                 ", listePilotesPlaceGains=" + listePilotesPlaceGains +
                 '}';
     }
+    /**
+     * méthode pour comparer que 2 objets sont égales par leur identifiant unique
+     * @param o l'objet Course qu'on compare
+     * @return true | false selon que c'est égale ou non
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return idCourse == course.idCourse;
+    }
+    /**
+     * méthode qui retourne une valeur sur idCourse
+     * @return la valeur
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCourse);
+    }
 
     /**
      * methode qui affiche tous les coureurs qui participent à une course avec leur position et leur gain
@@ -276,6 +297,7 @@ public class Course {
     public void addPilote(Pilote pilote) {
         Classement ajout = new Classement();
         ajout.setPilote(pilote);
+        listClassement.add(ajout);
     }
 
     /**
@@ -284,21 +306,26 @@ public class Course {
      */
     public void supPilote(Pilote pilote) {
         for (Classement c : listClassement) {
-            if (c.pilote == pilote) {
-                listClassement.remove(c.pilote);
+            if (c.pilote.equals(pilote)) {
+                listClassement.remove(c);
             }
         }
     }
 
     /**
-     * methode qui affiche le pilote dans le classement
+     * methode qui affiche les résultats du pilote dans le classement
      * @param pilote pilote à afficher
      * @param place place du pilote
      * @param gain gain du pilote
+     * @return le classement du pilote
      */
-    public void resultat(Pilote pilote, int place, BigDecimal gain) {
-        System.out.println(place+" "+pilote.nom+" "+pilote.prenom+" "+gain);
-
+    public Classement resultat(Pilote pilote, int place, BigDecimal gain) {
+        Classement c = new Classement();
+        c.setPilote(pilote);
+        c.setGain(gain);
+        c.setPlace(place);
+        listClassement.add(c);
+        return c;
     }
 
     /**
@@ -339,7 +366,7 @@ public class Course {
      */
     public boolean classementComplet() {
         for (Classement c : listClassement) {
-            if (c.pilote == null) {
+            if (c.place == 0) {
                 return false;
             }
         }

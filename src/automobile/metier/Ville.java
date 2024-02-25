@@ -1,5 +1,7 @@
 package automobile.metier;
 
+import java.util.Objects;
+
 /**
  * classe métier de gestion d'une ville
  * @author Nolwenn Ducarmois
@@ -146,5 +148,27 @@ public class Ville {
                 ", longitude=" + longitude +
                 ", pays=" + pays +
                 '}';
+    }
+
+    /**
+     * méthode pour comparer que 2 objets sont égales par leur identifiant unique
+     * @param o l'objet Ville qu'on compare
+     * @return true | false selon que c'est égale ou non
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ville ville = (Ville) o;
+        return idVille == ville.idVille;
+    }
+
+    /**
+     * méthode qui retourne une valeur sur idVille
+     * @return la valeur
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(idVille);
     }
 }
