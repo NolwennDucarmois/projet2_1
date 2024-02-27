@@ -3,7 +3,7 @@ package automobile.metier;
 import java.util.Objects;
 
 /**
- * classe métier de gestion d'une ville
+ * classe metier de gestion d'une ville
  * @author Nolwenn Ducarmois
  * @version 1.0
  */

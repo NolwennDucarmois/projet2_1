@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * classe métier de gestion d'une course
+ * classe metier de gestion d'une course
  * @author Nolwenn Ducarmois
  * @version 1.0
  */
@@ -194,14 +194,6 @@ public class Course {
     }
 
     /**
-     * setter listePilotesPlaceGain
-     * @param listePilotesPlaceGains nouvelle liste pour les pilotes dans le classement de la course
-     */
-    public void setListePilotesPlaceGains(List<ListePilotesPlaceGain> listePilotesPlaceGains) {
-        this.listePilotesPlaceGains = listePilotesPlaceGains;
-    }
-
-    /**
      * methode d'affichage de toutes les infos de l'objet de la classe Course
      * @return toutes les infos sur l'objet
      */
@@ -218,6 +210,7 @@ public class Course {
                 ", listePilotesPlaceGains=" + listePilotesPlaceGains +
                 '}';
     }
+
     /**
      * méthode pour comparer que 2 objets sont égales par leur identifiant unique
      * @param o l'objet Course qu'on compare
@@ -230,6 +223,7 @@ public class Course {
         Course course = (Course) o;
         return idCourse == course.idCourse;
     }
+
     /**
      * méthode qui retourne une valeur sur idCourse
      * @return la valeur
@@ -313,19 +307,25 @@ public class Course {
     }
 
     /**
-     * methode qui affiche les résultats du pilote dans le classement
-     * @param pilote pilote à afficher
-     * @param place place du pilote
-     * @param gain gain du pilote
+     * methode qui change les résultats du pilote dans le classement crée lors son inscription
+     * @param pilote pilote à rechercher dans le classement
+     * @param place  place du pilote
+     * @param gain   gain du pilote
      * @return le classement du pilote
      */
     public Classement resultat(Pilote pilote, int place, BigDecimal gain) {
-        Classement c = new Classement();
-        c.setPilote(pilote);
-        c.setGain(gain);
-        c.setPlace(place);
-        listClassement.add(c);
-        return c;
+        for (Classement c : listClassement) {
+            if (c.getPilote().equals(pilote) && c.getPlace() == 0 && c.getGain().compareTo(BigDecimal.ZERO) == 0) {
+                if(c.getPlace()!=-1) {
+                    c.setGain(gain);
+                    c.setPlace(place);
+                    return c;
+                }else{
+                    return null; // si il a abandonné
+                }
+            }
+        }
+        return null; // si aucun classement trouvé
     }
 
     /**
@@ -345,7 +345,7 @@ public class Course {
     }
 
     /**
-     * methode qui cherche les pilotes ayant comme nationalite la même que celle ou se déroule la course
+     * methode qui cherche les pilotes ayant comme nationalite la meme que celle ou se déroule la course
      * @return liste la liste des pilotes
      */
     public List<Pilote> listePilotesDuPays() {

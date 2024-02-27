@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * classe métier de gestion d'un pilote
+ * classe metier de gestion d'un pilote
  * @author Nolwenn Ducarmois
  * @version 1.0
  */
@@ -173,6 +173,7 @@ public class Pilote {
                 ", pays=" + pays +
                 '}';
     }
+
     /**
      * méthode pour comparer que 2 objets sont égales par leur identifiant unique
      * @param o l'objet Pilote qu'on compare
@@ -185,6 +186,7 @@ public class Pilote {
         Pilote pilote = (Pilote) o;
         return idPilote == pilote.idPilote;
     }
+
     /**
      * méthode qui retourne une valeur sur idPilote
      * @return la valeur

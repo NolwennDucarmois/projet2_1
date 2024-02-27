@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * classe métier de gestion d'un classement
+ * classe metier de gestion d'un classement
  * @author Nolwenn Ducarmois
  * @version 1.0
  */
@@ -34,14 +34,15 @@ public class Classement {
      * constructeur par defaut de la ville Classement
      */
     public Classement() {
-
+        place=0;
+        gain = new BigDecimal(0);
     }
 
     /**
      * constructeur parametre
-     * @param place     place dans le classement
-     * @param gain      gain obtenu du classement
-     * @param pilote    pilote du classement
+     * @param place  place dans le classement
+     * @param gain   gain obtenu du classement
+     * @param pilote pilote du classement
      */
     public Classement(int place, BigDecimal gain, Pilote pilote) {
         this.idClassement = id_act++;
@@ -127,6 +128,7 @@ public class Classement {
                 ", pilote=" + pilote +
                 '}';
     }
+
     /**
      * méthode pour comparer que 2 objets sont égales par leur identifiant unique
      * @param o l'objet Classement qu'on compare
@@ -139,6 +141,7 @@ public class Classement {
         Classement that = (Classement) o;
         return idClassement == that.idClassement;
     }
+
     /**
      * méthode qui retourne une valeur sur idClassement
      * @return la valeur

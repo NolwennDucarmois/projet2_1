@@ -3,7 +3,7 @@ package automobile.metier;
 import java.math.BigDecimal;
 
 /**
- * classe métier de gestion des pilotes + place + gain
+ * classe metier de gestion des pilotes + place + gain
  * @author Nolwenn Ducarmois
  * @version 1.0
  */

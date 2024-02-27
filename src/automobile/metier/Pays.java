@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * classe métier de gestion d'un pays
+ * classe metier de gestion d'un pays
  * @author Nolwenn Ducarmois
  * @version 1.0
  */
@@ -149,6 +149,7 @@ public class Pays {
                 ", listPilote=" + listPilote +
                 '}';
     }
+
     /**
      * méthode pour comparer que 2 objets sont égales par leur identifiant unique
      * @param o l'objet Pays qu'on compare
@@ -161,6 +162,7 @@ public class Pays {
         Pays pays = (Pays) o;
         return idPays == pays.idPays;
     }
+
     /**
      * méthode qui retourne une valeur sur idPays
      * @return la valeur
