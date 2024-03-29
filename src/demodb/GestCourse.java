@@ -1,6 +1,6 @@
 package demodb;
 
-import automobile.metier.Ville;
+import automobile.metier.Course;
 import myconnections.DBConnection;
 
 import java.math.BigDecimal;
@@ -66,7 +66,7 @@ public class GestCourse {
         String query1 = "insert into APICOURSE(nom, priceMoney, dateCourse, km) values(?,?,?,?)";
         String query2 = "select idCourse from APICOURSE where nom=?";
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
-             PreparedStatement pstm2 = dbConnect.prepareStatement(query2)
+             PreparedStatement pstm2 = dbConnect.prepareStatement(query2);
         ) {
             pstm1.setString(1, nom);
             pstm1.setBigDecimal(2, priceMoney);
@@ -90,11 +90,29 @@ public class GestCourse {
     }
 
     public void recherche() {
-
+        System.out.println("Id de la course à rechercher : ");
+        int id_rechercher = sc.nextInt();
+        String query = "select * from APICOURSE where idCourse=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
+            pstm.setInt(1, id_rechercher);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                String nom = rs.getString(2);
+                BigDecimal priceMoney = rs.getBigDecimal(3);
+                LocalDate dateCourse = rs.getDate(4).toLocalDate();
+                int km = rs.getInt(5);
+                Course c = new Course(id_rechercher, nom, priceMoney, dateCourse, km);
+                System.out.println(c);
+            } else {
+                System.out.println("Record introuvable");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur sql : " + e);
+        }
     }
 
     public void modification() {
-        System.out.println("id de la course à modifier : ");
+        System.out.println("Id de la course à modifier : ");
         int id_rechercher = sc.nextInt();
         sc.skip("\n");
         System.out.println("Nouveau priceMoney : ");
@@ -132,7 +150,21 @@ public class GestCourse {
     }
 
     public void tous() {
-
+        String query = "select * from APICOURSE";
+        try (Statement stm = dbConnect.createStatement()) {
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()) {
+                int idcourse = rs.getInt(1);
+                String nom = rs.getString(2);
+                BigDecimal priceMoney = rs.getBigDecimal(3);
+                LocalDate dateCourse = rs.getDate(4).toLocalDate();
+                int km = rs.getInt(5);
+                Course c = new Course(idcourse, nom, priceMoney, dateCourse, km);
+                System.out.println(c);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur sql : " + e);
+        }
     }
 
     public static void main(String[] args) {

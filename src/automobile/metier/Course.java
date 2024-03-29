@@ -8,6 +8,7 @@ import java.util.Objects;
 
 /**
  * classe metier de gestion d'une course
+ *
  * @author Nolwenn Ducarmois
  * @version 1.0
  */
@@ -58,6 +59,7 @@ public class Course {
 
     /**
      * constructeur parametre
+     *
      * @param nom        nom de la course
      * @param priceMoney priceMoney de la course
      * @param dateCourse date de quand se déroule la course
@@ -74,7 +76,25 @@ public class Course {
     }
 
     /**
+     * constructeur parametre
+     *
+     * @param idCourse   id de la course
+     * @param nom        nom de la course
+     * @param priceMoney priceMoney de la course
+     * @param dateCourse date de quand se déroule la course
+     * @param km         km total de la course
+     */
+    public Course(int idCourse, String nom, BigDecimal priceMoney, LocalDate dateCourse, int km) {
+        this.idCourse = idCourse;
+        this.nom = nom;
+        this.priceMoney = priceMoney;
+        this.dateCourse = dateCourse;
+        this.km = km;
+    }
+
+    /**
      * getter idCourse
+     *
      * @return identifiant de la course
      */
     public int getIdCourse() {
@@ -83,6 +103,7 @@ public class Course {
 
     /**
      * setter idCourse
+     *
      * @param idCourse nouveau identifiant de la course
      */
     public void setIdCourse(int idCourse) {
@@ -91,6 +112,7 @@ public class Course {
 
     /**
      * getter nom
+     *
      * @return nom de la course
      */
     public String getNom() {
@@ -99,6 +121,7 @@ public class Course {
 
     /**
      * setter nom
+     *
      * @param nom nouveau nom de la course
      */
     public void setNom(String nom) {
@@ -107,6 +130,7 @@ public class Course {
 
     /**
      * getter priceMoney
+     *
      * @return priceMoney de la course
      */
     public BigDecimal getPriceMoney() {
@@ -115,6 +139,7 @@ public class Course {
 
     /**
      * setter priceMoney
+     *
      * @param priceMoney nouveau prime max de la course
      */
     public void setPriceMoney(BigDecimal priceMoney) {
@@ -123,6 +148,7 @@ public class Course {
 
     /**
      * getter dateCourse
+     *
      * @return date de la course
      */
     public LocalDate getDateCourse() {
@@ -131,6 +157,7 @@ public class Course {
 
     /**
      * setter dateCourse
+     *
      * @param dateCourse nouvelle date pour la course
      */
     public void setDateCourse(LocalDate dateCourse) {
@@ -139,6 +166,7 @@ public class Course {
 
     /**
      * getter km
+     *
      * @return km total de la course
      */
     public int getKm() {
@@ -147,6 +175,7 @@ public class Course {
 
     /**
      * setter km
+     *
      * @param km nouvelle distance totale en km de la course
      */
     public void setKm(int km) {
@@ -155,6 +184,7 @@ public class Course {
 
     /**
      * getter ville
+     *
      * @return ville ou se déroule la course
      */
     public Ville getVille() {
@@ -163,6 +193,7 @@ public class Course {
 
     /**
      * setter ville
+     *
      * @param ville nouvelle ville pour la course
      */
     public void setVille(Ville ville) {
@@ -171,6 +202,7 @@ public class Course {
 
     /**
      * getter classement
+     *
      * @return la liste des classement pour cette course
      */
     public List<Classement> getListClassement() {
@@ -179,6 +211,7 @@ public class Course {
 
     /**
      * setter classement
+     *
      * @param listClassement nouvelle liste pour le classement de la course
      */
     public void setListClassement(List<Classement> listClassement) {
@@ -187,6 +220,7 @@ public class Course {
 
     /**
      * getter listePilotesPlaceGain
+     *
      * @return la liste des pilotes + place + gain
      */
     public List<ListePilotesPlaceGain> getListePilotesPlaceGains() {
@@ -195,6 +229,7 @@ public class Course {
 
     /**
      * methode d'affichage de toutes les infos de l'objet de la classe Course
+     *
      * @return toutes les infos sur l'objet
      */
     @Override
@@ -205,14 +240,12 @@ public class Course {
                 ", priceMoney=" + priceMoney +
                 ", dateCourse=" + dateCourse +
                 ", km=" + km +
-                ", ville=" + ville +
-                ", listClassement=" + listClassement +
-                ", listePilotesPlaceGains=" + listePilotesPlaceGains +
                 '}';
     }
 
     /**
      * méthode pour comparer que 2 objets sont égales par leur identifiant unique
+     *
      * @param o l'objet Course qu'on compare
      * @return true | false selon que c'est égale ou non
      */
@@ -226,6 +259,7 @@ public class Course {
 
     /**
      * méthode qui retourne une valeur sur idCourse
+     *
      * @return la valeur
      */
     @Override
@@ -244,6 +278,7 @@ public class Course {
 
     /**
      * methode qui calcule la somme des gains au total de la course
+     *
      * @return total retourne le total des gains
      */
     public BigDecimal gainTotal() {
@@ -256,6 +291,7 @@ public class Course {
 
     /**
      * methode qui cherche tous les pays des pilotes qui participent à la course et les stocke 1 seule fois
+     *
      * @return liste la liste des pays
      */
     public List<Pays> listePaysPilotes() {
@@ -271,6 +307,7 @@ public class Course {
 
     /**
      * methode qui chercher le vainqueur de la course
+     *
      * @return p le pilote vainqueur
      */
     public Pilote vainqueur() {
@@ -286,6 +323,7 @@ public class Course {
 
     /**
      * methode qui permet d'ajouter un pilote à la liste des participants
+     *
      * @param pilote le pilote à ajouter à la course
      */
     public void addPilote(Pilote pilote) {
@@ -296,6 +334,7 @@ public class Course {
 
     /**
      * methode qui supprime un pilote de la liste des participants à une course
+     *
      * @param pilote le pilote à supprimer de la course
      */
     public void supPilote(Pilote pilote) {
@@ -308,6 +347,7 @@ public class Course {
 
     /**
      * methode qui change les résultats du pilote dans le classement crée lors son inscription
+     *
      * @param pilote pilote à rechercher dans le classement
      * @param place  place du pilote
      * @param gain   gain du pilote
@@ -316,11 +356,11 @@ public class Course {
     public Classement resultat(Pilote pilote, int place, BigDecimal gain) {
         for (Classement c : listClassement) {
             if (c.getPilote().equals(pilote) && c.getPlace() == 0 && c.getGain().compareTo(BigDecimal.ZERO) == 0) {
-                if(c.getPlace()!=-1) {
+                if (c.getPlace() != -1) {
                     c.setGain(gain);
                     c.setPlace(place);
                     return c;
-                }else{
+                } else {
                     return null; // si il a abandonné
                 }
             }
@@ -330,6 +370,7 @@ public class Course {
 
     /**
      * methode qui modifie la place et le gain d'un pilote si il y a contestation lors du classement de la course
+     *
      * @param pilote le pilote pour lequel on modifie
      * @param place  la nouvelle place du pilote
      * @param gain   le nouveau gain du pilote après contestation
@@ -346,6 +387,7 @@ public class Course {
 
     /**
      * methode qui cherche les pilotes ayant comme nationalite la meme que celle ou se déroule la course
+     *
      * @return liste la liste des pilotes
      */
     public List<Pilote> listePilotesDuPays() {
@@ -362,6 +404,7 @@ public class Course {
 
     /**
      * methode qui retourne un boolean en fonction de si tous les pilotes inscrit à la course sont dans le classement
+     *
      * @return true | false
      */
     public boolean classementComplet() {
