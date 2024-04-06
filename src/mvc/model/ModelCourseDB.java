@@ -49,6 +49,7 @@ public class ModelCourseDB extends DAOCourse {
                 return null;
             }
         } catch (SQLException e) {
+            System.out.println("erreur sql : " + e);
             return null;
         }
     }
@@ -73,14 +74,20 @@ public class ModelCourseDB extends DAOCourse {
 
     @Override
     public Course updateCourse(Course course) {
-        String query = "update APICOURSE set priceMoney=? where idCourse=?";
+        String query = "update APICOURSE set nom=?, priceMoney=?, dateCourse=?, km=? where idCourse=?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
-            pstm.setBigDecimal(1, course.getPriceMoney());
-            pstm.setInt(2, course.getIdCourse());
+            pstm.setString(1, course.getNom());
+            pstm.setBigDecimal(2, course.getPriceMoney());
+            pstm.setDate(3, Date.valueOf(course.getDateCourse()));
+            pstm.setInt(4, course.getKm());
+            pstm.setInt(5, course.getIdCourse());
             int n = pstm.executeUpdate();
             notifyObservers();
-            if (n != 0) readCourse(course.getIdCourse());
-            else return null;
+            if (n != 0) {
+                readCourse(course.getIdCourse());
+            } else {
+                return null;
+            }
         } catch (SQLException e) {
             System.out.println("Erreur sql : " + e);
             return null;
@@ -89,17 +96,17 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public Course readCourse(int idCourse) {
+    public Course readCourse(int idcourse) {
         String query = "select * from APICOURSE where idCourse=?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
-            pstm.setInt(1, idCourse);
+            pstm.setInt(1, idcourse);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 String nom = rs.getString(2);
                 BigDecimal priceMoney = rs.getBigDecimal(3);
                 LocalDate dateCourse = rs.getDate(4).toLocalDate();
                 int km = rs.getInt(5);
-                Course c = new Course(idCourse, nom, priceMoney, dateCourse, km);
+                Course c = new Course(idcourse, nom, priceMoney, dateCourse, km);
                 return c;
             } else {
                 return null;

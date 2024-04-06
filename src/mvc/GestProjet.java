@@ -21,7 +21,7 @@ public class GestProjet {
         cc = new CourseController(cm, cv);
         cm.addObserver(cv);
 
-        List<String> loptions = Arrays.asList("course", "fin");
+        List<String> loptions = Arrays.asList("Courses", "FIN");
         do {
             int ch = Utilitaire.choixListe(loptions);
             switch (ch) {
@@ -29,6 +29,7 @@ public class GestProjet {
                     cv.menu();
                     break;
                 case 2:
+                    System.out.println("Fin du programme");
                     System.exit(0);
             }
         } while (true);
