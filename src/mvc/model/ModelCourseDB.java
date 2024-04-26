@@ -42,14 +42,14 @@ public class ModelCourseDB extends DAOCourse {
                     notifyObservers();
                     return course;
                 } else {
-                    System.out.println("record introuvable");
+                    System.err.println("record introuvable");
                     return null;
                 }
             } else {
                 return null;
             }
         } catch (SQLException e) {
-            System.out.println("erreur sql : " + e);
+            System.err.println("erreur sql : " + e);
             return null;
         }
     }
@@ -67,7 +67,7 @@ public class ModelCourseDB extends DAOCourse {
                 return false;
             }
         } catch (SQLException e) {
-            System.out.println("erreur sql : " + e);
+            System.err.println("erreur sql : " + e);
             return false;
         }
     }
@@ -89,7 +89,7 @@ public class ModelCourseDB extends DAOCourse {
                 return null;
             }
         } catch (SQLException e) {
-            System.out.println("Erreur sql : " + e);
+            System.err.println("Erreur sql : " + e);
             return null;
         }
         return course;
@@ -97,7 +97,7 @@ public class ModelCourseDB extends DAOCourse {
 
     @Override
     public Course readCourse(int idcourse) {
-        String query = "select * from APICOURSE where idCourse=?";
+        String query = "select * from APICOURSE where idCourse = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
             pstm.setInt(1, idcourse);
             ResultSet rs = pstm.executeQuery();
@@ -112,7 +112,7 @@ public class ModelCourseDB extends DAOCourse {
                 return null;
             }
         } catch (SQLException e) {
-            System.out.println("Erreur sql : " + e);
+            System.err.println("Erreur sql : " + e);
             return null;
         }
     }
@@ -134,7 +134,7 @@ public class ModelCourseDB extends DAOCourse {
             }
             return lc;
         } catch (SQLException e) {
-            System.out.println("Erreur sql : " + e);
+            System.err.println("Erreur sql : " + e);
             return null;
         }
     }

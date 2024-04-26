@@ -6,6 +6,7 @@ import java.util.Objects;
 
 /**
  * classe metier de gestion d'un pays
+ *
  * @author Nolwenn Ducarmois
  * @version 1.0
  */
@@ -44,6 +45,7 @@ public class Pays {
 
     /**
      * constructeur parametre
+     *
      * @param sigle  sigle du pays
      * @param nom    nom du pays
      * @param langue langue parlee dans le pays
@@ -55,8 +57,16 @@ public class Pays {
         this.langue = langue;
     }
 
+    public Pays(int idPays, String sigle, String nom, String langue) {
+        this.idPays = idPays;
+        this.sigle = sigle;
+        this.nom = nom;
+        this.langue = langue;
+    }
+
     /**
      * getter idPays
+     *
      * @return identifiant du pays
      */
     public int getIdPays() {
@@ -65,6 +75,7 @@ public class Pays {
 
     /**
      * setter idPays
+     *
      * @param idPays nouveau identifiant du pays
      */
     public void setIdPays(int idPays) {
@@ -73,6 +84,7 @@ public class Pays {
 
     /**
      * getter sigle
+     *
      * @return sigle du pays
      */
     public String getSigle() {
@@ -81,6 +93,7 @@ public class Pays {
 
     /**
      * setter sigle
+     *
      * @param sigle nouveau sigle du pays
      */
     public void setSigle(String sigle) {
@@ -89,6 +102,7 @@ public class Pays {
 
     /**
      * getter nom
+     *
      * @return nom du pays
      */
     public String getNom() {
@@ -97,6 +111,7 @@ public class Pays {
 
     /**
      * setter nom
+     *
      * @param nom nouveau nom du pays
      */
     public void setNom(String nom) {
@@ -105,6 +120,7 @@ public class Pays {
 
     /**
      * getter langue
+     *
      * @return langue parlee dans le pays
      */
     public String getLangue() {
@@ -113,6 +129,7 @@ public class Pays {
 
     /**
      * setter langue
+     *
      * @param langue nouvelle langue du pays
      */
     public void setLangue(String langue) {
@@ -121,6 +138,7 @@ public class Pays {
 
     /**
      * getter pilote
+     *
      * @return la liste des pilotes dans ce pays
      */
     public List<Pilote> getListPilote() {
@@ -129,6 +147,7 @@ public class Pays {
 
     /**
      * setter pilote
+     *
      * @param listPilote nouvelle liste de pilotes pour ce pays
      */
     public void setListPilote(List<Pilote> listPilote) {
@@ -137,6 +156,7 @@ public class Pays {
 
     /**
      * methode d'affichage de toutes les infos de l'objet de la classe Pays
+     *
      * @return toutes les infos sur l'objet
      */
     @Override
@@ -152,6 +172,7 @@ public class Pays {
 
     /**
      * méthode pour comparer que 2 objets sont égales par leur identifiant unique
+     *
      * @param o l'objet Pays qu'on compare
      * @return true | false selon que c'est égale ou non
      */
@@ -165,6 +186,7 @@ public class Pays {
 
     /**
      * méthode qui retourne une valeur sur idPays
+     *
      * @return la valeur
      */
     @Override
