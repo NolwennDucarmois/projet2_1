@@ -5,6 +5,7 @@ import java.util.Objects;
 
 /**
  * classe metier de gestion d'un pilote
+ *
  * @author Nolwenn Ducarmois
  * @version 1.0
  */
@@ -47,6 +48,7 @@ public class Pilote {
 
     /**
      * constructeur parametre
+     *
      * @param matricule matricule du pilote
      * @param nom       nom du pilote
      * @param prenom    prenom du pilote
@@ -61,9 +63,26 @@ public class Pilote {
         this.dateNaiss = dateNaiss;
         this.pays = pays;
     }
+    /**
+     * constructeur parametre
+     *
+     * @param idPilote identifiant du pilote
+     * @param matricule matricule du pilote
+     * @param nom       nom du pilote
+     * @param prenom    prenom du pilote
+     * @param dateNaiss date de naissance du pilote
+     */
+    public Pilote(int idPilote, String matricule, String nom, String prenom, LocalDate dateNaiss) {
+        this.idPilote = idPilote;
+        this.matricule = matricule;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaiss = dateNaiss;
+    }
 
     /**
      * getter idPilote
+     *
      * @return identifiant du pilote
      */
     public int getIdPilote() {
@@ -72,6 +91,7 @@ public class Pilote {
 
     /**
      * setter idPilote
+     *
      * @param idPilote nouveau identifiant du pilote
      */
     public void setIdPilote(int idPilote) {
@@ -80,6 +100,7 @@ public class Pilote {
 
     /**
      * getter matricule
+     *
      * @return matricule du pilote
      */
     public String getMatricule() {
@@ -88,6 +109,7 @@ public class Pilote {
 
     /**
      * setter matricule
+     *
      * @param matricule nouveau matricule du pilote
      */
     public void setMatricule(String matricule) {
@@ -96,6 +118,7 @@ public class Pilote {
 
     /**
      * getter nom
+     *
      * @return nom du pilote
      */
     public String getNom() {
@@ -104,6 +127,7 @@ public class Pilote {
 
     /**
      * setter nom
+     *
      * @param nom nouveau nom du pilote
      */
     public void setNom(String nom) {
@@ -112,6 +136,7 @@ public class Pilote {
 
     /**
      * getter prenom
+     *
      * @return prenom du pilote
      */
     public String getPrenom() {
@@ -120,6 +145,7 @@ public class Pilote {
 
     /**
      * setter prenom
+     *
      * @param prenom nouveau prenom du pilote
      */
     public void setPrenom(String prenom) {
@@ -128,6 +154,7 @@ public class Pilote {
 
     /**
      * getter dateNaiss
+     *
      * @return date de naissance du pilote
      */
     public LocalDate getDateNaiss() {
@@ -136,6 +163,7 @@ public class Pilote {
 
     /**
      * setter dateNaiss
+     *
      * @param dateNaiss nouvelle date de naissance du pilote
      */
     public void setDateNaiss(LocalDate dateNaiss) {
@@ -144,6 +172,7 @@ public class Pilote {
 
     /**
      * getter pays
+     *
      * @return nationalite du pilote
      */
     public Pays getPays() {
@@ -152,6 +181,7 @@ public class Pilote {
 
     /**
      * setter pays
+     *
      * @param pays nouvelle nationalite du pilote
      */
     public void setPays(Pays pays) {
@@ -160,6 +190,7 @@ public class Pilote {
 
     /**
      * methode d'affichage de toutes les infos de l'objet de la classe Pilote
+     *
      * @return toutes les infos sur l'objet
      */
     @Override
@@ -176,6 +207,7 @@ public class Pilote {
 
     /**
      * méthode pour comparer que 2 objets sont égales par leur identifiant unique
+     *
      * @param o l'objet Pilote qu'on compare
      * @return true | false selon que c'est égale ou non
      */
@@ -189,6 +221,7 @@ public class Pilote {
 
     /**
      * méthode qui retourne une valeur sur idPilote
+     *
      * @return la valeur
      */
     @Override
