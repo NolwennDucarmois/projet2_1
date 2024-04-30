@@ -48,7 +48,7 @@ public class CourseViewConsole extends CourseAbstractView {
     }
 
     public void ajouter() {
-        System.out.println("Nom : ");
+        System.out.println("Nom de la course : ");
         String nom = sc.nextLine();
         System.out.println("PriceMoney : ");
         BigDecimal priceMoney = new BigDecimal(sc.nextLine());
@@ -94,9 +94,9 @@ public class CourseViewConsole extends CourseAbstractView {
         BigDecimal priceMoney = new BigDecimal(modifyIfNotBlank("PriceMoney de la couse : ", "" + c.getPriceMoney()));
         LocalDate dateCourse = LocalDate.parse(modifyIfNotBlank("Date de la course : ", "" + c.getDateCourse()));
         int km = Integer.parseInt(modifyIfNotBlank("Km : ", "" + c.getKm()));
-        Course cmaj = courseController.update(new Course(c.getIdCourse(), nom, priceMoney, dateCourse, km));
-        if (cmaj != null) {
-            affMsg("mise à jour effectuée : " + cmaj);
+        Course maj = courseController.update(new Course(c.getIdCourse(), nom, priceMoney, dateCourse, km));
+        if (maj != null) {
+            affMsg("mise à jour effectuée : " + maj);
         } else {
             affMsg("mise à jour infructueuse");
         }

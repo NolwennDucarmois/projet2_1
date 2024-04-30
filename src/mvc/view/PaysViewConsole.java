@@ -28,7 +28,7 @@ public class PaysViewConsole extends PaysAbstractView {
     public void menu() {
         update(paysController.getAll());
         do {
-            int ch = choixListe(Arrays.asList("ajout", "retrait", "rechercher", "modifier", "fin"));
+            int ch = choixListe(Arrays.asList("Ajout", "Retrait", "Recherche", "Modification", "FIN"));
 
             switch (ch) {
                 case 1:
@@ -50,11 +50,11 @@ public class PaysViewConsole extends PaysAbstractView {
     }
 
     public void ajouter() {
-        System.out.println("sigle : ");
+        System.out.println("Sigle du pays : ");
         String sigle = sc.nextLine();
-        System.out.println("nom : ");
+        System.out.println("Nom du pays : ");
         String nom = sc.nextLine();
-        System.out.println("langue : ");
+        System.out.println("Langue : ");
         String langue = sc.nextLine();
         Pays pays = paysController.addPays(new Pays(0, sigle, nom, langue));
         if (pays != null) {
@@ -84,9 +84,9 @@ public class PaysViewConsole extends PaysAbstractView {
     public void modifier() {
         int n = choixElt(lp);
         Pays pays = lp.get(n - 1);
-        String sigle = modifyIfNotBlank("sigle", pays.getSigle());
-        String nom = modifyIfNotBlank("nom", pays.getNom());
-        String langue = modifyIfNotBlank("langue", pays.getLangue());
+        String sigle = modifyIfNotBlank("Sigle du pays : ", pays.getSigle());
+        String nom = modifyIfNotBlank("Nom du pays : ", pays.getNom());
+        String langue = modifyIfNotBlank("Langue : ", pays.getLangue());
         Pays maj = paysController.update(new Pays(pays.getIdPays(), sigle, nom, langue));
         if (maj == null) {
             affMsg("mise à jour infructueuse");

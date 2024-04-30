@@ -27,7 +27,7 @@ public class ModelPaysDB extends DAOPays {
     @Override
     public Pays addPays(Pays pays) {
         String query1 = "insert into APIPAYS(sigle, nom, langue) values (?,?,?)";
-        String query2 = "select idPays from APIPAYS wheresigle=?";
+        String query2 = "select idPays from APIPAYS where sigle=?";
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
              PreparedStatement pstm2 = dbConnect.prepareStatement(query2);
         ) {

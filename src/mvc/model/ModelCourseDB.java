@@ -84,7 +84,7 @@ public class ModelCourseDB extends DAOCourse {
             int n = pstm.executeUpdate();
             notifyObservers();
             if (n != 0) {
-                readCourse(course.getIdCourse());
+                return readCourse(course.getIdCourse());
             } else {
                 return null;
             }
@@ -92,7 +92,6 @@ public class ModelCourseDB extends DAOCourse {
             System.err.println("Erreur sql : " + e);
             return null;
         }
-        return course;
     }
 
     @Override
