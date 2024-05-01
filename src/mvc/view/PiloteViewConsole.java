@@ -94,7 +94,7 @@ public class PiloteViewConsole extends PiloteAbstractView {
         String nom = modifyIfNotBlank("Nom", pi.getNom());
         String prenom = modifyIfNotBlank("Prénom", pi.getPrenom());
         LocalDate dateNaiss = LocalDate.parse(modifyIfNotBlank("Date de naissance : ", "" + pi.getDateNaiss()));
-        Pilote maj = piloteController.update(new Pilote(pi.getIdPilote(), pi.getMatricule(), pi.getNom(), pi.getPrenom(), pi.getDateNaiss()));
+        Pilote maj = piloteController.update(new Pilote(pi.getIdPilote(), matricule, nom, prenom, dateNaiss));
         if (maj == null) {
             affMsg("mise à jour infructueuse");
         } else {

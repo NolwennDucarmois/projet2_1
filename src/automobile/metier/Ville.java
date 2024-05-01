@@ -4,6 +4,7 @@ import java.util.Objects;
 
 /**
  * classe metier de gestion d'une ville
+ *
  * @author Nolwenn Ducarmois
  * @version 1.0
  */
@@ -42,6 +43,7 @@ public class Ville {
 
     /**
      * constructeur parametre
+     *
      * @param nom       nom de la ville
      * @param latitude  latitude de la ville
      * @param longitude longitude de la ville
@@ -56,7 +58,23 @@ public class Ville {
     }
 
     /**
+     * constructeur parametre
+     *
+     * @param idVille   identifiant de la ville
+     * @param nom       nom de la ville
+     * @param latitude  latitude de la ville
+     * @param longitude longitude de la ville
+     */
+    public Ville(int idVille, String nom, double latitude, double longitude) {
+        this.idVille = idVille;
+        this.nom = nom;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    /**
      * getter idVille
+     *
      * @return identifiant de la ville
      */
     public int getIdVille() {
@@ -65,6 +83,7 @@ public class Ville {
 
     /**
      * setter idVille
+     *
      * @param idVille nouveau identifiant de la ville
      */
     public void setIdVille(int idVille) {
@@ -73,6 +92,7 @@ public class Ville {
 
     /**
      * getter nom
+     *
      * @return nom de la ville
      */
     public String getNom() {
@@ -81,6 +101,7 @@ public class Ville {
 
     /**
      * setter nom
+     *
      * @param nom nouveau nom de la ville
      */
     public void setNom(String nom) {
@@ -89,6 +110,7 @@ public class Ville {
 
     /**
      * getter latitude
+     *
      * @return latitude de la ville
      */
     public double getLatitude() {
@@ -97,6 +119,7 @@ public class Ville {
 
     /**
      * setter latitude
+     *
      * @param latitude nouvelle latitude de la ville
      */
     public void setLatitude(double latitude) {
@@ -105,6 +128,7 @@ public class Ville {
 
     /**
      * getter longitude
+     *
      * @return longitude de la ville
      */
     public double getLongitude() {
@@ -113,6 +137,7 @@ public class Ville {
 
     /**
      * setter longitude
+     *
      * @param longitude nouvelle longitude de la ville
      */
     public void setLongitude(double longitude) {
@@ -121,6 +146,7 @@ public class Ville {
 
     /**
      * getter pays
+     *
      * @return pays de la ville
      */
     public Pays getPays() {
@@ -129,6 +155,7 @@ public class Ville {
 
     /**
      * setter pays
+     *
      * @param pays nouveau pays de la ville
      */
     public void setPays(Pays pays) {
@@ -137,6 +164,7 @@ public class Ville {
 
     /**
      * methode d'affichage de toutes les infos de l'objet de la classe Ville
+     *
      * @return toutes les infos sur l'objet
      */
     @Override
@@ -152,6 +180,7 @@ public class Ville {
 
     /**
      * méthode pour comparer que 2 objets sont égales par leur identifiant unique
+     *
      * @param o l'objet Ville qu'on compare
      * @return true | false selon que c'est égale ou non
      */
@@ -165,6 +194,7 @@ public class Ville {
 
     /**
      * méthode qui retourne une valeur sur idVille
+     *
      * @return la valeur
      */
     @Override
