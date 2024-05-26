@@ -95,17 +95,17 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public Course readCourse(int idcourse) {
+    public Course readCourse(int idCourse) {
         String query = "select * from APICOURSE where idCourse = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
-            pstm.setInt(1, idcourse);
+            pstm.setInt(1, idCourse);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 String nom = rs.getString(2);
                 BigDecimal priceMoney = rs.getBigDecimal(3);
                 LocalDate dateCourse = rs.getDate(4).toLocalDate();
                 int km = rs.getInt(5);
-                Course c = new Course(idcourse, nom, priceMoney, dateCourse, km);
+                Course c = new Course(idCourse, nom, priceMoney, dateCourse, km);
                 return c;
             } else {
                 return null;

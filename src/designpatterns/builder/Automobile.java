@@ -37,7 +37,6 @@ public class Automobile {
                     setIdPays(1).
                     setSigle("JA").
                     setNom("Japon").
-                    setLangue("Japonais").
                     build();
             System.out.println(p4);
         }catch (Exception e){

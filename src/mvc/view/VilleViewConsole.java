@@ -53,9 +53,9 @@ public class VilleViewConsole extends VilleAbstractView {
         System.out.println("Nom de la ville : ");
         String nom = sc.nextLine();
         System.out.println("Latitude de la ville : ");
-        double latitude = sc.nextDouble();
+        double latitude = lireDouble();
         System.out.println("Longitude de la ville : ");
-        double longitude = sc.nextDouble();
+        double longitude = lireDouble();
         Ville v = villeController.addVille(new Ville(0, nom, latitude, longitude));
         if (v != null) {
             affMsg("création de : " + v);
@@ -65,6 +65,7 @@ public class VilleViewConsole extends VilleAbstractView {
     }
 
     public void retirer() {
+        System.out.println("Indiquez le numéro de la ligne");
         int n = choixElt(lv);
         Ville v = lv.get(n - 1);
         boolean ok = villeController.removeVille(v);
@@ -77,11 +78,17 @@ public class VilleViewConsole extends VilleAbstractView {
 
     public void rechercher() {
         System.out.println("idVille : ");
-        int idVille = sc.nextInt();
-        villeController.search(idVille);
+        int idVille = lireInt();
+        Ville v = villeController.search(idVille);
+        if(v == null){
+            System.out.println("ville non trouvé");
+        } else{
+            System.out.println(v);
+        }
     }
 
     public void modifier() {
+        System.out.println("Indiquez le numéro de la ligne");
         int n = choixElt(lv);
         Ville v = lv.get(n - 1);
         String nom = modifyIfNotBlank("Nom de la ville : ", v.getNom());

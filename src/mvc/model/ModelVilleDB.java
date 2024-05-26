@@ -2,7 +2,6 @@ package mvc.model;
 
 import automobile.metier.Ville;
 import myconnections.DBConnection;
-import oracle.jdbc.proxy.annotation.Pre;
 
 import java.sql.*;
 import java.util.ArrayList;

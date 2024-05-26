@@ -24,7 +24,5 @@ public class Automobile {
         System.out.println(champ2);
         System.out.println(champ3);
 
-
-
     }
 }

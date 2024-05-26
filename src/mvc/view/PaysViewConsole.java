@@ -65,6 +65,7 @@ public class PaysViewConsole extends PaysAbstractView {
     }
 
     public void retirer() {
+        System.out.println("Indiquez le numéro de la ligne");
         int n = choixElt(lp);
         Pays pays = lp.get(n - 1);
         boolean ok = paysController.removePays(pays);
@@ -77,11 +78,17 @@ public class PaysViewConsole extends PaysAbstractView {
 
     public void rechercher() {
         System.out.println("idPays : ");
-        int idPays = sc.nextInt();
-        paysController.search(idPays);
+        int idPays = lireInt();
+        Pays p = paysController.search(idPays);
+        if (p == null) {
+            System.out.println("Pays non trouvé");
+        } else {
+            System.out.println(p);
+        }
     }
 
     public void modifier() {
+        System.out.println("Indiquez le numéro de la ligne");
         int n = choixElt(lp);
         Pays pays = lp.get(n - 1);
         String sigle = modifyIfNotBlank("Sigle du pays : ", pays.getSigle());

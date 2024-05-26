@@ -19,7 +19,10 @@ public class PiloteViewConsole extends PiloteAbstractView {
 
     @Override
     public Pilote selectionner() {
-        return null;
+        update(piloteController.getAll());
+        int n = choixListe(lp);
+        Pilote p = lp.get(n - 1);
+        return p;
     }
 
     @Override
@@ -27,7 +30,6 @@ public class PiloteViewConsole extends PiloteAbstractView {
         update(piloteController.getAll());
         do {
             int ch = choixListe(Arrays.asList("Ajout", "Retrait", "Recherche", "Modification", "FIN"));
-
             switch (ch) {
                 case 1:
                     ajouter();
@@ -71,6 +73,7 @@ public class PiloteViewConsole extends PiloteAbstractView {
     }
 
     public void retirer() {
+        System.out.println("Indiquez le numéro de la ligne");
         int n = choixElt(lp);
         Pilote pi = lp.get(n - 1);
         boolean ok = piloteController.removePilote(pi);
@@ -83,11 +86,17 @@ public class PiloteViewConsole extends PiloteAbstractView {
 
     public void rechercher() {
         System.out.println("idPilote : ");
-        int idPilote = sc.nextInt();
-        piloteController.search(idPilote);
+        int idPilote = lireInt();
+        Pilote pi = piloteController.search(idPilote);
+        if (pi == null) {
+            System.out.println("Pilote non trouvé");
+        } else {
+            System.out.println(pi);
+        }
     }
 
     public void modifier() {
+        System.out.println("Indiquez le numéro de la ligne");
         int n = choixElt(lp);
         Pilote pi = lp.get(n - 1);
         String matricule = modifyIfNotBlank("Matricule", pi.getMatricule());

@@ -71,6 +71,7 @@ public class CourseViewConsole extends CourseAbstractView {
     }
 
     public void retirer() {
+        System.out.println("Indiquez le numéro de la ligne");
         int n = choixElt(lc);
         Course c = lc.get(n - 1);
         boolean ok = courseController.removeCourse(c);
@@ -83,11 +84,17 @@ public class CourseViewConsole extends CourseAbstractView {
 
     public void rechercher() {
         System.out.println("idCourse : ");
-        int idCourse = Integer.parseInt(sc.nextLine());
-        courseController.search(idCourse);
+        int idCourse = lireInt();
+        Course c = courseController.search(idCourse);
+        if (c == null) {
+            System.out.println("Course pas trouvé");
+        } else {
+            System.out.println(c);
+        }
     }
 
     public void modifier() {
+        System.out.println("Indiquez le numéro de la ligne");
         int n = choixElt(lc);
         Course c = lc.get(n - 1);
         String nom = modifyIfNotBlank("Nom de la course : ", c.getNom());
