@@ -115,7 +115,7 @@ public class ModelPiloteDB extends DAOPilote {
     }
 
     @Override
-    public List<Pilote> getPilotes() {
+    public List<Pilote> getPilote() {
         List<Pilote> lp = new ArrayList<>();
         String query = "select * from APIPILOTE";
         try (Statement stm = dbConnect.createStatement()) {
@@ -138,6 +138,6 @@ public class ModelPiloteDB extends DAOPilote {
 
     @Override
     public List getNotification() {
-        return getPilotes();
+        return getPilote();
     }
 }

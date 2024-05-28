@@ -17,7 +17,7 @@ public class PiloteController {
     }
 
     public List<Pilote> getAll() {
-        return model.getPilotes();
+        return model.getPilote();
     }
 
     public Pilote addPilote(Pilote pilote) {
