@@ -91,7 +91,7 @@ public class PiloteViewConsole extends PiloteAbstractView {
         if (pi == null) {
             System.out.println("Pilote non trouvé");
         } else {
-            System.out.println(pi);
+            affMsg(pi.toString());
         }
     }
 
@@ -102,7 +102,8 @@ public class PiloteViewConsole extends PiloteAbstractView {
         String matricule = modifyIfNotBlank("Matricule", pi.getMatricule());
         String nom = modifyIfNotBlank("Nom", pi.getNom());
         String prenom = modifyIfNotBlank("Prénom", pi.getPrenom());
-        LocalDate dateNaiss = LocalDate.parse(modifyIfNotBlank("Date de naissance : ", "" + pi.getDateNaiss()));
+        String date = modifyIfNotBlank("Date de naissance : ",pi.getDateNaiss()+"");
+        LocalDate dateNaiss = !date.equals("null")?LocalDate.parse(date):null;
         Pilote maj = piloteController.update(new Pilote(pi.getIdPilote(), matricule, nom, prenom, dateNaiss));
         if (maj == null) {
             affMsg("mise à jour infructueuse");

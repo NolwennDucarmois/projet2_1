@@ -1,6 +1,7 @@
 package mvc.view;
 
 import automobile.metier.Course;
+import mvc.controller.CourseController;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -89,7 +90,8 @@ public class CourseViewConsole extends CourseAbstractView {
         if (c == null) {
             System.out.println("Course pas trouvé");
         } else {
-            System.out.println(c);
+            affMsg(c.toString());
+            //special(c);
         }
     }
 
@@ -99,7 +101,8 @@ public class CourseViewConsole extends CourseAbstractView {
         Course c = lc.get(n - 1);
         String nom = modifyIfNotBlank("Nom de la course : ", c.getNom());
         BigDecimal priceMoney = new BigDecimal(modifyIfNotBlank("PriceMoney de la couse : ", "" + c.getPriceMoney()));
-        LocalDate dateCourse = LocalDate.parse(modifyIfNotBlank("Date de la course : ", "" + c.getDateCourse()));
+        String date = modifyIfNotBlank("Date de la course :  ",c.getDateCourse()+"");
+        LocalDate dateCourse = !date.equals("null")?LocalDate.parse(date):null;
         int km = Integer.parseInt(modifyIfNotBlank("Km : ", "" + c.getKm()));
         Course maj = courseController.update(new Course(c.getIdCourse(), nom, priceMoney, dateCourse, km));
         if (maj != null) {
@@ -117,4 +120,16 @@ public class CourseViewConsole extends CourseAbstractView {
         return c;
     }
 
+    /*private void special(Course c) {
+        do {
+            int choix = choixListe(Arrays.asList("Liste des coureurs avec place et gain", "Gain total de la course", "Liste des pays des coureurs", "Vainqueur de la course", "Ajout d'un pilote à la course", "Retrait d'un pilote à la course", "Enregistrement d'un résultat", "Modification d'un pilote", "Liste des coureurs du pays de la course", "Classement complet", "FIN"));
+            List l = switch (c){
+            };
+            if(c==null || c.isEmpty()){
+                affMsg("aucun élément trouvé");
+            } else{
+                affList(l);
+            }
+        }while (true);
+    }*/
 }

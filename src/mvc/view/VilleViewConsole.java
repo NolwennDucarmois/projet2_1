@@ -83,7 +83,7 @@ public class VilleViewConsole extends VilleAbstractView {
         if(v == null){
             System.out.println("ville non trouvé");
         } else{
-            System.out.println(v);
+            affMsg(v.toString());
         }
     }
 

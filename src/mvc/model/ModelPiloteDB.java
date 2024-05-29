@@ -125,7 +125,7 @@ public class ModelPiloteDB extends DAOPilote {
                 String matricule = rs.getString(2);
                 String nom = rs.getString(3);
                 String prenom = rs.getString(4);
-                LocalDate dateNaiss = rs.getDate(4).toLocalDate();
+                LocalDate dateNaiss = rs.getDate(5).toLocalDate();
                 Pilote pi = new Pilote(idPilote, matricule, nom, prenom, dateNaiss);
                 lp.add(pi);
             }

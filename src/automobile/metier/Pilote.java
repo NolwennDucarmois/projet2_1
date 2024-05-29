@@ -79,7 +79,6 @@ public class Pilote {
         this.prenom = prenom;
         this.dateNaiss = dateNaiss;
     }
-
     /**
      * getter idPilote
      *

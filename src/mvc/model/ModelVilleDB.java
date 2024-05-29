@@ -30,8 +30,8 @@ public class ModelVilleDB extends DAOVille {
             pstm1.setDouble(3, ville.getLongitude());
             int n = pstm1.executeUpdate();
             if (n == 1) {
-                pstm2.setDouble(2, ville.getLatitude());
-                pstm2.setDouble(3, ville.getLongitude());
+                pstm2.setDouble(1, ville.getLatitude());
+                pstm2.setDouble(2, ville.getLongitude());
                 ResultSet rs = pstm2.executeQuery();
                 if (rs.next()) {
                     int idVille = rs.getInt(1);

@@ -15,4 +15,6 @@ public abstract class DAOCourse extends Subject {
     public abstract Course readCourse(int idCourse);
 
     public abstract List<Course> getCourse();
+
+
 }

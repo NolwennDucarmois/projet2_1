@@ -83,7 +83,7 @@ public class PaysViewConsole extends PaysAbstractView {
         if (p == null) {
             System.out.println("Pays non trouvé");
         } else {
-            System.out.println(p);
+            affMsg(p.toString());
         }
     }
 
