@@ -1,9 +1,6 @@
 package mvc.view;
 
-import automobile.metier.Course;
-import automobile.metier.ListePilotesPlaceGain;
-import automobile.metier.Pays;
-import automobile.metier.Pilote;
+import automobile.metier.*;
 import mvc.controller.CourseController;
 import mvc.controller.PiloteController;
 
@@ -195,9 +192,9 @@ public class CourseViewConsole extends CourseAbstractView {
         Pilote p = pv.selectionner();
         boolean ok = courseController.addPilote(c, p);
         if (ok) {
-            affMsg("Pilote ajouté");
+            affMsg("Pilote ajouté\n");
         } else {
-            affMsg("Erreur lors de l'ajout du pilote");
+            affMsg("Erreur lors de l'ajout du pilote\n");
         }
     }
 
@@ -206,14 +203,24 @@ public class CourseViewConsole extends CourseAbstractView {
         Pilote p = pv.selectionner();
         boolean ok = courseController.supPilote(c, p);
         if (ok) {
-            affMsg("pilote supprimé avec succès de la course");
+            affMsg("pilote supprimé avec succès de la course\n");
         } else {
-            affMsg("pilote dans la course non supprimé");
+            affMsg("pilote dans la course non supprimé\n");
         }
     }
 
     public void resultat(Course c) {
-
+        Pilote p = pv.selectionner();
+        System.out.println("Place : ");
+        int place = lireInt();
+        System.out.println("Gain : ");
+        BigDecimal gain = sc.nextBigDecimal();
+        Classement cl = courseController.resultat(c, p, place, gain);
+        if (cl != null) {
+            affMsg("Ajout du résultat du pilote avec succès\n");
+        } else {
+            affMsg("Problème lors de l'enregistrement du résultat\n");
+        }
     }
 
     public void modif(Course c) {
@@ -224,9 +231,9 @@ public class CourseViewConsole extends CourseAbstractView {
         BigDecimal gain = sc.nextBigDecimal();
         boolean ok = courseController.modif(c, p, place, gain);
         if (ok) {
-            affMsg("Modifié avec succès");
+            affMsg("Modifié avec succès\n");
         } else {
-            affMsg("Problème lors de la modification");
+            affMsg("Problème lors de la modification\n");
         }
     }
 

@@ -121,12 +121,7 @@ public class Classement {
      */
     @Override
     public String toString() {
-        return "Classement{" +
-                "idClassement=" + idClassement +
-                ", place=" + place +
-                ", gain=" + gain +
-                ", pilote=" + pilote +
-                '}';
+        return idClassement+" place = "+place+" avec "+gain+" pour "+pilote;
     }
 
     /**
