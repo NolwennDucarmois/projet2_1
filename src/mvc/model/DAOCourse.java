@@ -21,7 +21,7 @@ public abstract class DAOCourse extends Subject {
 
     public abstract BigDecimal gainTotal(Course course);
 
-    public abstract List<Pays> listePaysPilotes();
+    public abstract List<Pays> listePaysPilotes(Course course);
 
     public abstract Pilote vainqueur(Course course);
 
@@ -33,7 +33,7 @@ public abstract class DAOCourse extends Subject {
 
     public abstract boolean modif();
 
-    public abstract List<Pilote> listePilotesDuPays();
+    public abstract List<Pilote> listePilotesDuPays(Course course);
 
     public abstract boolean classementComplet();
 }

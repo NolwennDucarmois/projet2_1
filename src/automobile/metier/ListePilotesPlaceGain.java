@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 /**
  * classe metier de gestion des pilotes + place + gain
+ *
  * @author Nolwenn Ducarmois
  * @version 1.0
  */
@@ -30,6 +31,7 @@ public class ListePilotesPlaceGain {
 
     /**
      * constructeur parametre
+     *
      * @param pilote pilote
      * @param place  place du pilote
      * @param gain   gain du pilote
@@ -42,6 +44,7 @@ public class ListePilotesPlaceGain {
 
     /**
      * getter pilote
+     *
      * @return pilote
      */
     public Pilote getPilote() {
@@ -50,6 +53,7 @@ public class ListePilotesPlaceGain {
 
     /**
      * setter pilote
+     *
      * @param pilote nouveau pilote
      */
     public void setPilote(Pilote pilote) {
@@ -58,6 +62,7 @@ public class ListePilotesPlaceGain {
 
     /**
      * getter place
+     *
      * @return place du pilote
      */
     public int getPlace() {
@@ -66,6 +71,7 @@ public class ListePilotesPlaceGain {
 
     /**
      * setter place
+     *
      * @param place nouvelle place du pilote
      */
     public void setPlace(int place) {
@@ -74,6 +80,7 @@ public class ListePilotesPlaceGain {
 
     /**
      * getter gain
+     *
      * @return gain du pilote
      */
     public BigDecimal getGain() {
@@ -82,6 +89,7 @@ public class ListePilotesPlaceGain {
 
     /**
      * setter gain
+     *
      * @param gain nouveau gain du pilote
      */
     public void setGain(BigDecimal gain) {
@@ -90,10 +98,11 @@ public class ListePilotesPlaceGain {
 
     /**
      * methode d'affichage de toutes les infos de l'objet de la classe ListePilotesPlaceGain
+     *
      * @return toutes les infos sur l'objet
      */
     @Override
     public String toString() {
-        return place + ".\t " + pilote + " " + gain + "€";
+        return "\n" + place + ". n°" + pilote.getMatricule() + " -- " + pilote.getNom() + " " + pilote.getPrenom() + " né le " + pilote.getDateNaiss() + " : " + gain + "€";
     }
 }

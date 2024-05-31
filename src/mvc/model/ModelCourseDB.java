@@ -140,7 +140,27 @@ public class ModelCourseDB extends DAOCourse {
 
     @Override
     public List<ListePilotesPlaceGain> listePilotesPlaceGain(Course course) {
-        return null;
+        List<ListePilotesPlaceGain> liste = new ArrayList<>();
+        String query = "select * from apiclassement cl join apipilote pi on cl.idPilote=pi.idPilote where cl.idCourse = ? order by cl.place";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
+            pstm.setInt(1, course.getIdCourse());
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                int idPilote = rs.getInt("idpilote");
+                String matriculePilote = rs.getString("matricule");
+                String nomPilote = rs.getString("nom");
+                String prenomPilote = rs.getString("prenom");
+                LocalDate dateNaissPilote = rs.getDate("dateNaiss").toLocalDate();
+                Pilote pi = new Pilote(idPilote, matriculePilote, nomPilote, prenomPilote, dateNaissPilote);
+                int place = rs.getInt("place");
+                BigDecimal gain = rs.getBigDecimal("gain");
+                ListePilotesPlaceGain li = new ListePilotesPlaceGain(pi, place, gain);
+                liste.add(li);
+            }
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
+        }
+        return liste;
     }
 
     @Override
@@ -160,14 +180,36 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public List<Pays> listePaysPilotes() {
-        return null;
+    public List<Pays> listePaysPilotes(Course course) {
+        List<Pays> liste = new ArrayList<>();
+        String query = "SELECT distinct p.idPays, p.sigle, p.nom, p.langue \n" +
+                "FROM apipays p \n" +
+                "JOIN apipilote pi ON p.idPays=pi.idPays\n" +
+                "JOIN apiclassement cl ON cl.idPilote = pi.idPilote\n" +
+                "WHERE cl.idCourse = ?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
+            pstm.setInt(1, course.getIdCourse());
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                int idPays = rs.getInt("idPays");
+                String sigle = rs.getString("sigle");
+                String nomPays = rs.getString("nom");
+                String langue = rs.getString("langue");
+                Pays p = new Pays(idPays, sigle, nomPays, langue);
+                if (!liste.contains(p)) {
+                    liste.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
+        }
+        return liste;
     }
 
     @Override
     public Pilote vainqueur(Course course) {
         Pilote p = null;
-        String query = "select * from apiclassement cl join apipilote pi on cl.idpilote = pi.idpilote where idcourse = ? and place = 1";
+        String query = "select * from apiclassement cl join apipilote pi on cl.idpilote = pi.idpilote where cl.idcourse = ? and cl.place = 1";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
             pstm.setInt(1, course.getIdCourse());
             ResultSet rs = pstm.executeQuery();
@@ -202,8 +244,30 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public List<Pilote> listePilotesDuPays() {
-        return null;
+    public List<Pilote> listePilotesDuPays(Course course) {
+        List<Pilote> liste = new ArrayList<>();
+        String query = "select pi.* from apipilote pi\n" +
+                "JOIN apiclassement cl on cl.idpilote = pi.idPilote\n" +
+                "JOIN apicourse c on c.idcourse=cl.idcourse\n" +
+                "JOIN apiville v on v.idVille=c.idVille\n" +
+                "JOIN apipays p on p.idPays=v.idpays and p.idpays=pi.idpays\n" +
+                "WHERE c.idCourse=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
+            pstm.setInt(1, course.getIdCourse());
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                int idPilote = rs.getInt("idpilote");
+                String matriculePilote = rs.getString("matricule");
+                String nomPilote = rs.getString("nom");
+                String prenomPilote = rs.getString("prenom");
+                LocalDate dateNaissPilote = rs.getDate("dateNaiss").toLocalDate();
+                Pilote pi = new Pilote(idPilote, matriculePilote, nomPilote, prenomPilote, dateNaissPilote);
+                liste.add(pi);
+            }
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
+        }
+        return liste;
     }
 
     @Override

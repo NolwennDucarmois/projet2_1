@@ -161,13 +161,7 @@ public class Pays {
      */
     @Override
     public String toString() {
-        return "Pays{" +
-                "idPays=" + idPays +
-                ", sigle='" + sigle + '\'' +
-                ", nom='" + nom + '\'' +
-                ", langue='" + langue + '\'' +
-                ", listPilote=" + listPilote +
-                '}';
+        return "\n" + idPays + ") " + sigle + " -> " + nom + ", langue : " + langue;
     }
 
     /**

@@ -45,8 +45,8 @@ public class CourseController {
         return model.gainTotal(course);
     }
 
-    public List<Pays> listePaysPilotes() {
-        return model.listePaysPilotes();
+    public List<Pays> listePaysPilotes(Course course) {
+        return model.listePaysPilotes(course);
     }
 
     public Pilote vainqueur(Course course) {
@@ -69,8 +69,8 @@ public class CourseController {
         return model.modif();
     }
 
-    public List<Pilote> listePilotesDuPays() {
-        return model.listePilotesDuPays();
+    public List<Pilote> listePilotesDuPays(Course course) {
+        return model.listePilotesDuPays(course);
     }
 
     public boolean classementComplet() {

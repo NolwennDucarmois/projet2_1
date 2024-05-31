@@ -1,6 +1,8 @@
 package mvc.view;
 
 import automobile.metier.Course;
+import automobile.metier.ListePilotesPlaceGain;
+import automobile.metier.Pays;
 import automobile.metier.Pilote;
 import mvc.controller.CourseController;
 
@@ -129,15 +131,15 @@ public class CourseViewConsole extends CourseAbstractView {
                     "Menu principal de course")
             );
             switch (choix) {
-                case 1 -> courseController.listePilotesPlaceGain(c);
+                case 1 -> listePilotesPlaceGain(c);
                 case 2 -> gainTotal(c);
-                case 3 -> courseController.listePaysPilotes();
+                case 3 -> listePaysPilotes(c);
                 case 4 -> vainqueur(c);
                 case 5 -> courseController.addPilote(c);
                 case 6 -> courseController.supPilote();
                 case 7 -> courseController.resultat();
                 case 8 -> courseController.modif();
-                case 9 -> courseController.listePilotesDuPays();
+                case 9 -> listePilotesDuPays(c);
                 case 10 -> courseController.classementComplet();
                 case 11 -> {
                     return;
@@ -145,22 +147,54 @@ public class CourseViewConsole extends CourseAbstractView {
             }
         } while (true);
     }
-    public void gainTotal(Course c){
-        BigDecimal t = new BigDecimal(0);
-        t = t.add(courseController.gainTotal(c));
-        if(t.equals(BigDecimal.ZERO)){
-            System.out.println("Aucun gain total pour la course : "+c.getNom()+"\n");
-        } else{
-            System.out.println("La course du "+c.getNom()+" a pour gain total : "+t+"\n");
+
+    public void listePilotesPlaceGain(Course c) {
+        List<ListePilotesPlaceGain> liste = courseController.listePilotesPlaceGain(c);
+        if (liste.isEmpty()) {
+            System.out.println("La liste est null\n");
+        } else {
+            System.out.println("Liste pour la course " + c.getNom() + " : ");
+            System.out.println(liste + "\n");
         }
     }
-    public void vainqueur(Course c){
+
+    public void gainTotal(Course c) {
+        BigDecimal t = new BigDecimal(0);
+        t = t.add(courseController.gainTotal(c));
+        if (t.equals(BigDecimal.ZERO)) {
+            System.out.println("Aucun gain total pour la course : " + c.getNom() + "\n");
+        } else {
+            System.out.println("La course du " + c.getNom() + " a pour gain total : " + t + "\n");
+        }
+    }
+
+    public void listePaysPilotes(Course c) {
+        List<Pays> liste = courseController.listePaysPilotes(c);
+        if (liste.isEmpty()) {
+            System.out.println("La liste est null\n");
+        } else {
+            System.out.println("Liste des pays pour la course " + c.getNom() + " : ");
+            System.out.println(liste + "\n");
+        }
+    }
+
+    public void vainqueur(Course c) {
         Pilote p;
         p = courseController.vainqueur(c);
-        if(p==null){
-            System.out.println("Aucun vainqueur pour la course : "+c.getNom()+"\n");
-        } else{
-            System.out.println("La course du "+c.getNom()+" a pour vainqueur : "+p+"\n");
+        if (p == null) {
+            System.out.println("Aucun vainqueur pour la course : " + c.getNom() + "\n");
+        } else {
+            System.out.println("La course du " + c.getNom() + " a pour vainqueur : " + p + "\n");
+        }
+    }
+
+    public void listePilotesDuPays(Course c) {
+        List<Pilote> liste = courseController.listePilotesDuPays(c);
+        if (liste.isEmpty()) {
+            System.out.println("La liste est null\n");
+        } else {
+            System.out.println("Liste des pilotes pour le pays " + c.getVille().getPays().getNom() + " de la course " + c.getNom() + " : ");
+            System.out.println(liste + "\n");
         }
     }
 }
