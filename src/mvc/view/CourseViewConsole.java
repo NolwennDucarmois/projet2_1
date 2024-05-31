@@ -17,7 +17,6 @@ import static utilitaires.Utilitaire.*;
 
 public class CourseViewConsole extends CourseAbstractView {
     private Scanner sc = new Scanner(System.in);
-    private PiloteController piloteController;
 
     @Override
     public void affMsg(String msg) {
@@ -125,6 +124,7 @@ public class CourseViewConsole extends CourseAbstractView {
         return c;
     }
 
+
     private void special(Course c) {
         do {
             int choix = choixListe(Arrays.asList("Liste des pilotes avec place et gain", "Gain total de la course",
@@ -139,10 +139,10 @@ public class CourseViewConsole extends CourseAbstractView {
                 case 4 -> vainqueur(c);
                 case 5 -> addPilote(c);
                 case 6 -> supPilote(c);
-                case 7 -> resultat();
-                case 8 -> modif();
+                case 7 -> resultat(c);
+                case 8 -> modif(c);
                 case 9 -> listePilotesDuPays(c);
-                case 10 -> classementComplet();
+                case 10 -> classementComplet(c);
                 case 11 -> {
                     return;
                 }
@@ -212,12 +212,22 @@ public class CourseViewConsole extends CourseAbstractView {
         }
     }
 
-    public void resultat() {
+    public void resultat(Course c) {
 
     }
 
-    public void modif() {
-
+    public void modif(Course c) {
+        Pilote p = pv.selectionner();
+        System.out.println("Nouvelle place : ");
+        int place = lireInt();
+        System.out.println("Nouveau gain : ");
+        BigDecimal gain = sc.nextBigDecimal();
+        boolean ok = courseController.modif(c, p, place, gain);
+        if (ok) {
+            affMsg("Modifié avec succès");
+        } else {
+            affMsg("Problème lors de la modification");
+        }
     }
 
     public void listePilotesDuPays(Course c) {
@@ -230,7 +240,12 @@ public class CourseViewConsole extends CourseAbstractView {
         }
     }
 
-    public void classementComplet() {
-
+    public void classementComplet(Course course) {
+        boolean ok = courseController.classementComplet(course);
+        if (ok) {
+            affMsg("Tous les pilotes inscrits ont une place\n");
+        } else {
+            affMsg("Des pilotes n'ont pas de place encore\n");
+        }
     }
 }

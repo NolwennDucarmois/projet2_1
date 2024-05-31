@@ -2,6 +2,7 @@ package mvc.view;
 
 import automobile.metier.Course;
 import mvc.controller.CourseController;
+import mvc.controller.PiloteController;
 import mvc.observer.Observer;
 
 import java.util.List;
@@ -22,8 +23,9 @@ public abstract class CourseAbstractView implements Observer {
     public abstract void menu();
 
     public abstract void affList(List l);
-    public void setPiloteView(PiloteAbstractView pv){
-        this.pv=pv;
+
+    public void setPiloteView(PiloteAbstractView pv) {
+        this.pv = pv;
     }
 
     @Override

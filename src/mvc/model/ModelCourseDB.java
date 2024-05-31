@@ -2,6 +2,7 @@ package mvc.model;
 
 import automobile.metier.*;
 import myconnections.DBConnection;
+import oracle.jdbc.proxy.annotation.Pre;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -275,13 +276,40 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public Classement resultat() {
+    public Classement resultat(Course c, Pilote pi, int place, BigDecimal gain) {
         return null;
     }
 
     @Override
-    public boolean modif() {
-        return false;
+    // aide de ChatGpt pour meiux comprendre comment refuser la modification pour une place déjà prise
+    public boolean modif(Course c, Pilote pi, int place, BigDecimal gain) {
+        String query1 = "select * from apiclassement where place = ? and idCourse = ?";
+        String query2 = "update apiclassement set place = ?, gain = ? where idCourse = ? and idPilote = ?";
+        try (PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
+             PreparedStatement pstm2 = dbConnect.prepareStatement(query2)
+        ) {
+            pstm1.setInt(1, place);
+            pstm1.setInt(2, c.getIdCourse());
+            ResultSet rs = pstm1.executeQuery();
+            if (rs.next()) {
+                System.out.println("La place est déjà occupé dans la course");
+                return false;
+            } else {
+                pstm2.setInt(1, place);
+                pstm2.setBigDecimal(2, gain);
+                pstm2.setInt(3, c.getIdCourse());
+                pstm2.setInt(4, pi.getIdPilote());
+                int n = pstm2.executeUpdate();
+                if (n != 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
+            return false;
+        }
     }
 
     @Override
@@ -312,8 +340,22 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public boolean classementComplet() {
-        return false;
+    public boolean classementComplet(Course course) {
+        String query = "select place from apiclassement where idCourse=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
+            pstm.setInt(1, course.getIdCourse());
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                int place = rs.getInt(1);
+                if (place != -1 && place < 1) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
+            return false;
+        }
     }
 
     @Override

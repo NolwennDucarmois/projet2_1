@@ -61,19 +61,19 @@ public class CourseController {
         return model.supPilote(c, pi);
     }
 
-    public Classement resultat() {
-        return model.resultat();
+    public Classement resultat(Course c, Pilote pi, int place, BigDecimal gain) {
+        return model.resultat(c, pi, place, gain);
     }
 
-    public boolean modif() {
-        return model.modif();
+    public boolean modif(Course c, Pilote pi, int place, BigDecimal gain) {
+        return model.modif(c, pi, place, gain);
     }
 
     public List<Pilote> listePilotesDuPays(Course course) {
         return model.listePilotesDuPays(course);
     }
 
-    public boolean classementComplet() {
-        return model.classementComplet();
+    public boolean classementComplet(Course course) {
+        return model.classementComplet(course);
     }
 }

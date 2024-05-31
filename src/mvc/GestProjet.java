@@ -57,13 +57,13 @@ public class GestProjet {
                 case 1:
                     cv.menu();
                     break;
-                case 2 :
+                case 2:
                     pv.menu();
                     break;
-                case 3 :
+                case 3:
                     pav.menu();
                     break;
-                case 4 :
+                case 4:
                     vv.menu();
                     break;
                 case 5:

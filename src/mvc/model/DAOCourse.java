@@ -29,11 +29,11 @@ public abstract class DAOCourse extends Subject {
 
     public abstract boolean supPilote(Course c, Pilote pi);
 
-    public abstract Classement resultat();
+    public abstract Classement resultat(Course c, Pilote pi, int place, BigDecimal gain);
 
-    public abstract boolean modif();
+    public abstract boolean modif(Course c, Pilote pi, int place, BigDecimal gain);
 
     public abstract List<Pilote> listePilotesDuPays(Course course);
 
-    public abstract boolean classementComplet();
+    public abstract boolean classementComplet(Course course);
 }
