@@ -1,6 +1,7 @@
 package mvc.view;
 
 import automobile.metier.Course;
+import automobile.metier.Pilote;
 import mvc.controller.CourseController;
 
 import java.math.BigDecimal;
@@ -127,21 +128,39 @@ public class CourseViewConsole extends CourseAbstractView {
                     "Enregistrement d'un résultat", "Modification d'un pilote", "Liste des coureurs du pays de la course", "Classement complet",
                     "Menu principal de course")
             );
-            if (choix == 11) {
-                return;
-            }
             switch (choix) {
                 case 1 -> courseController.listePilotesPlaceGain(c);
-                case 2 -> courseController.gainTotal(c);
+                case 2 -> gainTotal(c);
                 case 3 -> courseController.listePaysPilotes();
-                case 4 -> courseController.vainqueur(c);
-                case 5 -> courseController.addPilote();
+                case 4 -> vainqueur(c);
+                case 5 -> courseController.addPilote(c);
                 case 6 -> courseController.supPilote();
                 case 7 -> courseController.resultat();
                 case 8 -> courseController.modif();
                 case 9 -> courseController.listePilotesDuPays();
                 case 10 -> courseController.classementComplet();
+                case 11 -> {
+                    return;
+                }
             }
         } while (true);
+    }
+    public void gainTotal(Course c){
+        BigDecimal t = new BigDecimal(0);
+        t = t.add(courseController.gainTotal(c));
+        if(t.equals(BigDecimal.ZERO)){
+            System.out.println("Aucun gain total pour la course : "+c.getNom()+"\n");
+        } else{
+            System.out.println("La course du "+c.getNom()+" a pour gain total : "+t+"\n");
+        }
+    }
+    public void vainqueur(Course c){
+        Pilote p;
+        p = courseController.vainqueur(c);
+        if(p==null){
+            System.out.println("Aucun vainqueur pour la course : "+c.getNom()+"\n");
+        } else{
+            System.out.println("La course du "+c.getNom()+" a pour vainqueur : "+p+"\n");
+        }
     }
 }

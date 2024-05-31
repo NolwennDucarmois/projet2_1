@@ -144,7 +144,7 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public void gainTotal(Course course) {
+    public BigDecimal gainTotal(Course course) {
         BigDecimal total = new BigDecimal(0);
         String query = "select gain from apiclassement where idcourse = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
@@ -156,11 +156,7 @@ public class ModelCourseDB extends DAOCourse {
         } catch (SQLException e) {
             System.err.println("erreur sql : " + e);
         }
-        if (total.equals(BigDecimal.ZERO)) {
-            System.out.println("La course " + course.getNom() + " n'a aucun gain" + "\n");
-        } else {
-            System.out.println("La course " + course.getNom() + " a un gain total de : " + total + "\n");
-        }
+        return total;
     }
 
     @Override
@@ -169,7 +165,7 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public void vainqueur(Course course) {
+    public Pilote vainqueur(Course course) {
         Pilote p = null;
         String query = "select * from apiclassement cl join apipilote pi on cl.idpilote = pi.idpilote where idcourse = ? and place = 1";
         try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
@@ -177,20 +173,16 @@ public class ModelCourseDB extends DAOCourse {
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 // aide par SatckOverflow pour savoir que je pouvais mettre les noms des colonnes pour qu'ils reconnaissent mieux quand il y a plusieurs tables
-                p = new Pilote(rs.getInt("idPilote"), rs.getString("matricule"), rs.getString("nom"), rs.getString("prenom"));
+                p = new Pilote(rs.getInt("idPilote"), rs.getString("matricule"), rs.getString("nom"), rs.getString("prenom"), rs.getDate("datenaiss").toLocalDate());
             }
         } catch (SQLException e) {
             System.err.println("erreur sql : " + e);
         }
-        if (p == null) {
-            System.out.println("Aucun vainqueur pour la course : " + course.getNom() + "\n");
-        } else {
-            System.out.println(p + "\n");
-        }
+        return p;
     }
 
     @Override
-    public boolean addPilote() {
+    public boolean addPilote(Course course) {
         return false;
     }
 

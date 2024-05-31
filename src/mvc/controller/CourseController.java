@@ -41,20 +41,20 @@ public class CourseController {
         return model.listePilotesPlaceGain(course);
     }
 
-    public void gainTotal(Course course) {
-        model.gainTotal(course);
+    public BigDecimal gainTotal(Course course) {
+        return model.gainTotal(course);
     }
 
     public List<Pays> listePaysPilotes() {
         return model.listePaysPilotes();
     }
 
-    public void vainqueur(Course course) {
-        model.vainqueur(course);
+    public Pilote vainqueur(Course course) {
+        return model.vainqueur(course);
     }
 
-    public boolean addPilote() {
-        return model.addPilote();
+    public boolean addPilote(Course course) {
+        return model.addPilote(course);
     }
 
     public boolean supPilote() {
