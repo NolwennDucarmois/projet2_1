@@ -224,13 +224,54 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public boolean addPilote(Course course) {
-        return false;
+    public boolean addPilote(Course course, Pilote pi) {
+        String query1 = "insert into apiclassement(place, gain, idpilote, idCourse) values(?,?,?,?)";
+        String query2 = "select idclassement from apiclassement where place=? and gain=? and idPilote=? and idCourse=?";
+        try (PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
+             PreparedStatement pstm2 = dbConnect.prepareStatement(query2)
+        ) {
+            pstm1.setInt(1, 0);
+            pstm1.setBigDecimal(2, BigDecimal.ZERO);
+            pstm1.setInt(3, pi.getIdPilote());
+            pstm1.setInt(4, course.getIdCourse());
+            int n = pstm1.executeUpdate();
+            if (n == 1) {
+                pstm2.setInt(1, 0);
+                pstm2.setBigDecimal(2, BigDecimal.ZERO);
+                pstm2.setInt(3, pi.getIdPilote());
+                pstm2.setInt(4, course.getIdCourse());
+                ResultSet rs = pstm2.executeQuery();
+                if (rs.next()) {
+                    return true;
+                } else {
+                    System.err.println("record introuvable");
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
+            return false;
+        }
     }
 
     @Override
-    public boolean supPilote() {
-        return false;
+    public boolean supPilote(Course c, Pilote pi) {
+        String query = "delete from apiclassement where idcourse = ? and idpilote = ?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
+            pstm.setInt(1, c.getIdCourse());
+            pstm.setInt(2, pi.getIdPilote());
+            int n = pstm.executeUpdate();
+            if (n != 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
+            return false;
+        }
     }
 
     @Override

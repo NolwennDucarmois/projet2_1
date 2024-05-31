@@ -161,7 +161,7 @@ public class Pays {
      */
     @Override
     public String toString() {
-        return "\n" + idPays + ") " + sigle + " -> " + nom + ", langue : " + langue;
+        return idPays + ") " + sigle + " -> " + nom + ", langue : " + langue;
     }
 
     /**

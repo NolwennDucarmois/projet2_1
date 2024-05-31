@@ -25,6 +25,5 @@ public abstract class PiloteAbstractView implements Observer {
     @Override
     public void update(List lp) {
         this.lp = lp;
-        affList(lp);
     }
 }

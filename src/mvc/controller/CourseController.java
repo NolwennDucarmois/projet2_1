@@ -53,12 +53,12 @@ public class CourseController {
         return model.vainqueur(course);
     }
 
-    public boolean addPilote(Course course) {
-        return model.addPilote(course);
+    public boolean addPilote(Course course, Pilote pi) {
+        return model.addPilote(course, pi);
     }
 
-    public boolean supPilote() {
-        return model.supPilote();
+    public boolean supPilote(Course c, Pilote pi) {
+        return model.supPilote(c, pi);
     }
 
     public Classement resultat() {

@@ -5,6 +5,7 @@ import automobile.metier.ListePilotesPlaceGain;
 import automobile.metier.Pays;
 import automobile.metier.Pilote;
 import mvc.controller.CourseController;
+import mvc.controller.PiloteController;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import static utilitaires.Utilitaire.*;
 
 public class CourseViewConsole extends CourseAbstractView {
     private Scanner sc = new Scanner(System.in);
+    private PiloteController piloteController;
 
     @Override
     public void affMsg(String msg) {
@@ -135,12 +137,12 @@ public class CourseViewConsole extends CourseAbstractView {
                 case 2 -> gainTotal(c);
                 case 3 -> listePaysPilotes(c);
                 case 4 -> vainqueur(c);
-                case 5 -> courseController.addPilote(c);
-                case 6 -> courseController.supPilote();
-                case 7 -> courseController.resultat();
-                case 8 -> courseController.modif();
+                case 5 -> addPilote(c);
+                case 6 -> supPilote(c);
+                case 7 -> resultat();
+                case 8 -> modif();
                 case 9 -> listePilotesDuPays(c);
-                case 10 -> courseController.classementComplet();
+                case 10 -> classementComplet();
                 case 11 -> {
                     return;
                 }
@@ -188,6 +190,36 @@ public class CourseViewConsole extends CourseAbstractView {
         }
     }
 
+    public void addPilote(Course c) {
+        System.out.println("Ajout d'un pilote à la course : " + c.getNom());
+        Pilote p = pv.selectionner();
+        boolean ok = courseController.addPilote(c, p);
+        if (ok) {
+            affMsg("Pilote ajouté");
+        } else {
+            affMsg("Erreur lors de l'ajout du pilote");
+        }
+    }
+
+    public void supPilote(Course c) {
+        System.out.println("Pilote à supprimer de la course (indiquer le n° de la ligne): ");
+        Pilote p = pv.selectionner();
+        boolean ok = courseController.supPilote(c, p);
+        if (ok) {
+            affMsg("pilote supprimé avec succès de la course");
+        } else {
+            affMsg("pilote dans la course non supprimé");
+        }
+    }
+
+    public void resultat() {
+
+    }
+
+    public void modif() {
+
+    }
+
     public void listePilotesDuPays(Course c) {
         List<Pilote> liste = courseController.listePilotesDuPays(c);
         if (liste.isEmpty()) {
@@ -196,5 +228,9 @@ public class CourseViewConsole extends CourseAbstractView {
             System.out.println("Liste des pilotes pour le pays " + c.getVille().getPays().getNom() + " de la course " + c.getNom() + " : ");
             System.out.println(liste + "\n");
         }
+    }
+
+    public void classementComplet() {
+
     }
 }

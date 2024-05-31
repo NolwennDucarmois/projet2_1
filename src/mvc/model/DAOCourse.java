@@ -25,9 +25,9 @@ public abstract class DAOCourse extends Subject {
 
     public abstract Pilote vainqueur(Course course);
 
-    public abstract boolean addPilote(Course c);
+    public abstract boolean addPilote(Course c, Pilote pi);
 
-    public abstract boolean supPilote();
+    public abstract boolean supPilote(Course c, Pilote pi);
 
     public abstract Classement resultat();
 

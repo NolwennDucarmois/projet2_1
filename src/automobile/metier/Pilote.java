@@ -200,14 +200,7 @@ public class Pilote {
      */
     @Override
     public String toString() {
-        return "Pilote{" +
-                "idPilote=" + idPilote +
-                ", matricule='" + matricule + '\'' +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", dateNaiss=" + dateNaiss +
-                ", pays=" + pays +
-                '}';
+        return idPilote +" : n°"+ matricule + " -- "+nom +" " +prenom + " né le "+dateNaiss;
     }
 
     /**

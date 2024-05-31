@@ -48,6 +48,8 @@ public class GestProjet {
         vc = new VilleController(vm, vv);
         vm.addObserver(vv);
 
+        cv.setPiloteView(pv);
+
         List<String> loptions = Arrays.asList("Courses", "Pilotes", "Pays", "Villes", "FIN");
         do {
             int ch = Utilitaire.choixListe(loptions);
