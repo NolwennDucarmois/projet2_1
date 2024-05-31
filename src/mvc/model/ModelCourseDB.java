@@ -1,6 +1,6 @@
 package mvc.model;
 
-import automobile.metier.Course;
+import automobile.metier.*;
 import myconnections.DBConnection;
 
 import java.math.BigDecimal;
@@ -136,6 +136,56 @@ public class ModelCourseDB extends DAOCourse {
             System.err.println("Erreur sql : " + e);
             return null;
         }
+    }
+
+    @Override
+    public List<ListePilotesPlaceGain> listePilotesPlaceGain(Course course) {
+        return null;
+    }
+
+    @Override
+    public BigDecimal gainTotal(Course course) {
+        return null;
+    }
+
+    @Override
+    public List<Pays> listePaysPilotes() {
+        return null;
+    }
+
+    @Override
+    public Pilote vainqueur() {
+        return null;
+    }
+
+    @Override
+    public boolean addPilote() {
+        return false;
+    }
+
+    @Override
+    public boolean supPilote() {
+        return false;
+    }
+
+    @Override
+    public Classement resultat() {
+        return null;
+    }
+
+    @Override
+    public boolean modif() {
+        return false;
+    }
+
+    @Override
+    public List<Pilote> listePilotesDuPays() {
+        return null;
+    }
+
+    @Override
+    public boolean classementComplet() {
+        return false;
     }
 
     @Override

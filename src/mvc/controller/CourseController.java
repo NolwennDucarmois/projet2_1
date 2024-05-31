@@ -1,9 +1,10 @@
 package mvc.controller;
 
-import automobile.metier.Course;
+import automobile.metier.*;
 import mvc.model.DAOCourse;
 import mvc.view.CourseAbstractView;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class CourseController {
@@ -34,5 +35,45 @@ public class CourseController {
 
     public Course search(int idCourse) {
         return model.readCourse(idCourse);
+    }
+
+    public List<ListePilotesPlaceGain> listePilotesPlaceGain(Course course) {
+        return model.listePilotesPlaceGain(course);
+    }
+
+    public BigDecimal gainTotal(Course course) {
+        return model.gainTotal(course);
+    }
+
+    public List<Pays> listePaysPilotes() {
+        return model.listePaysPilotes();
+    }
+
+    public Pilote vainqueur() {
+        return model.vainqueur();
+    }
+
+    public boolean addPilote() {
+        return model.addPilote();
+    }
+
+    public boolean supPilote() {
+        return model.supPilote();
+    }
+
+    public Classement resultat() {
+        return model.resultat();
+    }
+
+    public boolean modif() {
+        return model.modif();
+    }
+
+    public List<Pilote> listePilotesDuPays() {
+        return model.listePilotesDuPays();
+    }
+
+    public boolean classementComplet() {
+        return model.classementComplet();
     }
 }

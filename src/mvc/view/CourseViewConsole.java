@@ -91,7 +91,7 @@ public class CourseViewConsole extends CourseAbstractView {
             System.out.println("Course pas trouvé");
         } else {
             affMsg(c.toString());
-            //special(c);
+            special(c);
         }
     }
 
@@ -101,8 +101,8 @@ public class CourseViewConsole extends CourseAbstractView {
         Course c = lc.get(n - 1);
         String nom = modifyIfNotBlank("Nom de la course : ", c.getNom());
         BigDecimal priceMoney = new BigDecimal(modifyIfNotBlank("PriceMoney de la couse : ", "" + c.getPriceMoney()));
-        String date = modifyIfNotBlank("Date de la course :  ",c.getDateCourse()+"");
-        LocalDate dateCourse = !date.equals("null")?LocalDate.parse(date):null;
+        String date = modifyIfNotBlank("Date de la course :  ", c.getDateCourse() + "");
+        LocalDate dateCourse = !date.equals("null") ? LocalDate.parse(date) : null;
         int km = Integer.parseInt(modifyIfNotBlank("Km : ", "" + c.getKm()));
         Course maj = courseController.update(new Course(c.getIdCourse(), nom, priceMoney, dateCourse, km));
         if (maj != null) {
@@ -120,16 +120,24 @@ public class CourseViewConsole extends CourseAbstractView {
         return c;
     }
 
-    /*private void special(Course c) {
+    private void special(Course c) {
         do {
-            int choix = choixListe(Arrays.asList("Liste des coureurs avec place et gain", "Gain total de la course", "Liste des pays des coureurs", "Vainqueur de la course", "Ajout d'un pilote à la course", "Retrait d'un pilote à la course", "Enregistrement d'un résultat", "Modification d'un pilote", "Liste des coureurs du pays de la course", "Classement complet", "FIN"));
-            List l = switch (c){
-            };
-            if(c==null || c.isEmpty()){
-                affMsg("aucun élément trouvé");
-            } else{
-                affList(l);
+            int choix = choixListe(Arrays.asList("Liste des pilotes avec place et gain", "Gain total de la course", "Liste des pays des pilotes", "Vainqueur de la course", "Ajout d'un pilote à la course", "Retrait d'un pilote à la course", "Enregistrement d'un résultat", "Modification d'un pilote", "Liste des coureurs du pays de la course", "Classement complet", "FIN"));
+            if (choix == 11) {
+                return;
             }
-        }while (true);
-    }*/
+            switch (choix) {
+                case 1 -> courseController.listePilotesPlaceGain(c);
+                case 2 -> courseController.gainTotal(c);
+                case 3 -> courseController.listePaysPilotes();
+                case 4 -> courseController.vainqueur();
+                case 5 -> courseController.addPilote();
+                case 6 -> courseController.supPilote();
+                case 7 -> courseController.resultat();
+                case 8 -> courseController.modif();
+                case 9 -> courseController.listePilotesDuPays();
+                case 10 -> courseController.classementComplet();
+            }
+        } while (true);
+    }
 }
