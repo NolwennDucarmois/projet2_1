@@ -79,6 +79,12 @@ public class Pilote {
         this.prenom = prenom;
         this.dateNaiss = dateNaiss;
     }
+    public Pilote(int idPilote, String matricule, String nom, String prenom) {
+        this.idPilote = idPilote;
+        this.matricule = matricule;
+        this.nom = nom;
+        this.prenom = prenom;
+    }
     /**
      * getter idPilote
      *

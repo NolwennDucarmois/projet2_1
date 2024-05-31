@@ -144,8 +144,23 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public BigDecimal gainTotal(Course course) {
-        return null;
+    public void gainTotal(Course course) {
+        BigDecimal total = new BigDecimal(0);
+        String query = "select gain from apiclassement where idcourse = ?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
+            pstm.setInt(1, course.getIdCourse());
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                total = total.add(rs.getBigDecimal("gain"));
+            }
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
+        }
+        if (total.equals(BigDecimal.ZERO)) {
+            System.out.println("La course " + course.getNom() + " n'a aucun gain" + "\n");
+        } else {
+            System.out.println("La course " + course.getNom() + " a un gain total de : " + total + "\n");
+        }
     }
 
     @Override
@@ -154,8 +169,24 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public Pilote vainqueur() {
-        return null;
+    public void vainqueur(Course course) {
+        Pilote p = null;
+        String query = "select * from apiclassement cl join apipilote pi on cl.idpilote = pi.idpilote where idcourse = ? and place = 1";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
+            pstm.setInt(1, course.getIdCourse());
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                // aide par SatckOverflow pour savoir que je pouvais mettre les noms des colonnes pour qu'ils reconnaissent mieux quand il y a plusieurs tables
+                p = new Pilote(rs.getInt("idPilote"), rs.getString("matricule"), rs.getString("nom"), rs.getString("prenom"));
+            }
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
+        }
+        if (p == null) {
+            System.out.println("Aucun vainqueur pour la course : " + course.getNom() + "\n");
+        } else {
+            System.out.println(p + "\n");
+        }
     }
 
     @Override

@@ -19,11 +19,11 @@ public abstract class DAOCourse extends Subject {
 
     public abstract List<ListePilotesPlaceGain> listePilotesPlaceGain(Course course);
 
-    public abstract BigDecimal gainTotal(Course course);
+    public abstract void gainTotal(Course course);
 
     public abstract List<Pays> listePaysPilotes();
 
-    public abstract Pilote vainqueur();
+    public abstract void vainqueur(Course course);
 
     public abstract boolean addPilote();
 

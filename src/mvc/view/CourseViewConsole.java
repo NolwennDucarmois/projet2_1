@@ -28,7 +28,7 @@ public class CourseViewConsole extends CourseAbstractView {
     public void menu() {
         update(courseController.getAll());
         do {
-            int ch = choixListe(Arrays.asList("Ajout", "Retrait", "Recherche", "Modification", "FIN"));
+            int ch = choixListe(Arrays.asList("Ajout", "Retrait", "Recherche", "Modification", "Menu principal"));
             switch (ch) {
                 case 1:
                     ajouter();
@@ -122,7 +122,11 @@ public class CourseViewConsole extends CourseAbstractView {
 
     private void special(Course c) {
         do {
-            int choix = choixListe(Arrays.asList("Liste des pilotes avec place et gain", "Gain total de la course", "Liste des pays des pilotes", "Vainqueur de la course", "Ajout d'un pilote à la course", "Retrait d'un pilote à la course", "Enregistrement d'un résultat", "Modification d'un pilote", "Liste des coureurs du pays de la course", "Classement complet", "FIN"));
+            int choix = choixListe(Arrays.asList("Liste des pilotes avec place et gain", "Gain total de la course",
+                    "Liste des pays des pilotes", "Vainqueur de la course", "Ajout d'un pilote à la course", "Retrait d'un pilote à la course",
+                    "Enregistrement d'un résultat", "Modification d'un pilote", "Liste des coureurs du pays de la course", "Classement complet",
+                    "Menu principal de course")
+            );
             if (choix == 11) {
                 return;
             }
@@ -130,7 +134,7 @@ public class CourseViewConsole extends CourseAbstractView {
                 case 1 -> courseController.listePilotesPlaceGain(c);
                 case 2 -> courseController.gainTotal(c);
                 case 3 -> courseController.listePaysPilotes();
-                case 4 -> courseController.vainqueur();
+                case 4 -> courseController.vainqueur(c);
                 case 5 -> courseController.addPilote();
                 case 6 -> courseController.supPilote();
                 case 7 -> courseController.resultat();
