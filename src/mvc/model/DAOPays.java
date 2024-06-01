@@ -1,6 +1,7 @@
 package mvc.model;
 
 import automobile.metier.Pays;
+import automobile.metier.Pilote;
 import mvc.observer.Subject;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public abstract class DAOPays extends Subject {
     public abstract Pays readPays(int idPays);
 
     public abstract List<Pays> getPays();
+    public abstract List<Pilote> listePilotes(Pays pays);
 }

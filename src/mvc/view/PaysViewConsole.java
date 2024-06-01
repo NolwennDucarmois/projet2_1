@@ -1,6 +1,7 @@
 package mvc.view;
 
 import automobile.metier.Pays;
+import automobile.metier.Pilote;
 
 import java.util.Arrays;
 import java.util.List;
@@ -84,6 +85,7 @@ public class PaysViewConsole extends PaysAbstractView {
             System.out.println("Pays non trouvé");
         } else {
             affMsg(p.toString());
+            special(p);
         }
     }
 
@@ -105,5 +107,27 @@ public class PaysViewConsole extends PaysAbstractView {
     @Override
     public void affList(List infos) {
         affListe(infos);
+    }
+
+    public void special(Pays p) {
+        do {
+            int choix = choixListe(Arrays.asList("Liste des pilotes du pays", "Menu principal"));
+            switch (choix) {
+                case 1 -> listePilotes(p);
+                case 2 -> {
+                    return;
+                }
+            }
+        } while (true);
+    }
+
+    public void listePilotes(Pays pays) {
+        List<Pilote> liste = paysController.listePilotes(pays);
+        if (liste.isEmpty()) {
+            System.out.println("La liste est null\n");
+        } else {
+            System.out.println("Liste des pilotes du pays " + pays.getNom() + " : ");
+            System.out.println(liste);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package mvc.controller;
 
 import automobile.metier.Pays;
+import automobile.metier.Pilote;
 import mvc.model.DAOPays;
 import mvc.view.PaysAbstractView;
 
@@ -34,5 +35,8 @@ public class PaysController {
 
     public Pays search(int idPays) {
         return model.readPays(idPays);
+    }
+    public List<Pilote> listePilotes(Pays pays){
+        return model.listePilotes(pays);
     }
 }

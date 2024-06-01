@@ -15,6 +15,7 @@ public class GestProjet {
     private DAOCourse cm;
     private DAOPilote pm;
     private DAOPays pam;
+    private DAOPays pamh;
     private DAOVille vm;
 
     private CourseController cc;
@@ -38,10 +39,13 @@ public class GestProjet {
         pc = new PiloteController(pm, pv);
         pm.addObserver(pv);
 
-        pam = new ModelPaysDB();
+        //pam = new ModelPaysDB();
+        pamh = new ModelPaysDBHyb();
         pav = new PaysViewConsole();
-        pac = new PaysController(pam, pav);
-        pam.addObserver(pav);
+        //pac = new PaysController(pam, pav);
+        pac = new PaysController(pamh, pav);
+        //pam.addObserver(pav);
+        pamh.addObserver(pav);
 
         vm = new ModelVilleDB();
         vv = new VilleViewConsole();
