@@ -29,6 +29,7 @@ public class PiloteViewConsole extends PiloteAbstractView {
     public void menu() {
         update(piloteController.getAll());
         do {
+            affList(lp);
             int ch = choixListe(Arrays.asList("Ajout", "Retrait", "Recherche", "Modification", "FIN"));
             switch (ch) {
                 case 1:

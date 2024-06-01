@@ -52,10 +52,22 @@ public class VilleViewConsole extends VilleAbstractView {
     public void ajouter() {
         System.out.println("Nom de la ville : ");
         String nom = sc.nextLine();
-        System.out.println("Latitude de la ville : ");
-        double latitude = lireDouble();
-        System.out.println("Longitude de la ville : ");
-        double longitude = lireDouble();
+        double latitude;
+        do {
+            System.out.println("Latitude de la ville : ");
+            latitude = lireDouble();
+            if (latitude < -90 || latitude > 90) {
+                System.err.println("Latitude comprise entre -90 et 90");
+            }
+        } while (latitude < -90 || latitude > 90);
+        double longitude;
+        do {
+            System.out.println("Longitude de la ville : ");
+            longitude = lireDouble();
+            if (longitude < -180 || longitude > 180) {
+                System.err.println("Longitude comprise entre -180 et 180");
+            }
+        } while (longitude < -180 || longitude > 180);
         Ville v = villeController.addVille(new Ville(0, nom, latitude, longitude));
         if (v != null) {
             affMsg("création de : " + v);
@@ -80,9 +92,9 @@ public class VilleViewConsole extends VilleAbstractView {
         System.out.println("idVille : ");
         int idVille = lireInt();
         Ville v = villeController.search(idVille);
-        if(v == null){
+        if (v == null) {
             System.out.println("ville non trouvé");
-        } else{
+        } else {
             affMsg(v.toString());
         }
     }
@@ -92,8 +104,21 @@ public class VilleViewConsole extends VilleAbstractView {
         int n = choixElt(lv);
         Ville v = lv.get(n - 1);
         String nom = modifyIfNotBlank("Nom de la ville : ", v.getNom());
-        double latitude = Double.parseDouble(modifyIfNotBlank("Latitude de la ville : ", "" + v.getLatitude()));
-        double longitude = Double.parseDouble(modifyIfNotBlank("Longitude de la ville ; ", "" + v.getLongitude()));
+        double latitude;
+        do {
+            latitude = Double.parseDouble(modifyIfNotBlank("Latitude de la ville : ", "" + v.getLatitude()));
+            if (latitude < -90 || latitude > 90) {
+                System.err.println("Latitude comprise entre -90 et 90");
+            }
+        } while (latitude < -90 || latitude > 90);
+        double longitude;
+        do {
+            longitude = Double.parseDouble(modifyIfNotBlank("Longitude de la ville ; ", "" + v.getLongitude()));
+            if (longitude < -180 || longitude > 180) {
+                System.err.println("Longitude comprise entre -180 et 180");
+            }
+        } while (longitude < -180 || longitude > 180);
+
         Ville maj = villeController.update(new Ville(v.getIdVille(), nom, latitude, longitude));
         if (maj == null) {
             affMsg("mise à jour infructueuse");

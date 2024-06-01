@@ -277,6 +277,7 @@ public class ModelCourseDB extends DAOCourse {
             if (n != 0) {
                 return true;
             } else {
+                System.err.println("Le pilote n'existe pas pour cette course");
                 return false;
             }
         } catch (SQLException e) {
@@ -289,36 +290,36 @@ public class ModelCourseDB extends DAOCourse {
     public Classement resultat(Course c, Pilote pi, int place, BigDecimal gain) {
         String query1 = "select * from apiclassement where idPilote = ? and idCourse = ?";
         String query2 = "insert into apiclassement(place, gain, idpilote, idcourse) values (?,?,?,?)";
-        try(PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
-            PreparedStatement pstm2 = dbConnect.prepareStatement(query2)
-        ){
+        try (PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
+             PreparedStatement pstm2 = dbConnect.prepareStatement(query2)
+        ) {
             pstm1.setInt(1, pi.getIdPilote());
             pstm1.setInt(2, c.getIdCourse());
             ResultSet rs = pstm1.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 pstm2.setInt(1, place);
                 pstm2.setBigDecimal(2, gain);
                 pstm2.setInt(3, pi.getIdPilote());
                 pstm2.setInt(4, c.getIdCourse());
                 int n = pstm2.executeUpdate();
-                if(n == 1){
+                if (n == 1) {
                     return new Classement(place, gain, pi);
-                }else{
+                } else {
                     System.err.println("record introuvable");
                     return null;
                 }
-            }else{
-                System.out.println("Le pilote n'est pas inscrit pour cette course\n");
+            } else {
+                System.err.println("Le pilote n'est pas inscrit pour cette course\n");
                 return null;
             }
-        }catch (SQLException e){
-            System.err.println("erreur sql : "+e);
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
             return null;
         }
     }
 
     @Override
-    // aide de ChatGpt pour meiux comprendre comment refuser la modification pour une place déjà prise
+    // aide de ChatGpt pour mieux comprendre comment refuser la modification pour une place déjà prise
     public boolean modif(Course c, Pilote pi, int place, BigDecimal gain) {
         if (place == -1) {
             String query = "update apiclassement set place = ?, gain = ? where idCourse = ? and idPilote = ?";
@@ -331,6 +332,7 @@ public class ModelCourseDB extends DAOCourse {
                 if (n != 0) {
                     return true;
                 } else {
+                    System.err.println("Le pilote n'est pas inscrit dans cette course");
                     return false;
                 }
             } catch (SQLException e) {
@@ -347,7 +349,7 @@ public class ModelCourseDB extends DAOCourse {
                 pstm1.setInt(2, c.getIdCourse());
                 ResultSet rs = pstm1.executeQuery();
                 if (rs.next()) {
-                    System.out.println("La place est déjà occupé dans la course\n");
+                    System.err.println("La place est déjà occupé dans la course\n");
                     return false;
                 } else {
                     pstm2.setInt(1, place);
@@ -358,6 +360,7 @@ public class ModelCourseDB extends DAOCourse {
                     if (n != 0) {
                         return true;
                     } else {
+                        System.err.println("Le pilote n'est pas inscrit dans cette course");
                         return false;
                     }
                 }

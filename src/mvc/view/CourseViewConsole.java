@@ -52,8 +52,19 @@ public class CourseViewConsole extends CourseAbstractView {
     public void ajouter() {
         System.out.println("Nom de la course : ");
         String nom = sc.nextLine();
-        System.out.println("PriceMoney : ");
-        BigDecimal priceMoney = new BigDecimal(sc.nextLine());
+        BigDecimal priceMoney = null;
+        do {
+            System.out.println("PriceMoney : ");
+            try {
+                priceMoney = new BigDecimal(sc.nextLine());
+                if (priceMoney.compareTo(BigDecimal.ZERO) < 0) {
+                    System.err.println("PriceMoney doit etre >= à 0");
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("entrée invalide");
+                priceMoney = null;
+            }
+        } while (priceMoney == null || priceMoney.compareTo(BigDecimal.ZERO) < 0);
         System.out.println("Date de la course : ");
         System.out.println("Jour : ");
         int jour = Integer.parseInt(sc.nextLine());
@@ -62,8 +73,14 @@ public class CourseViewConsole extends CourseAbstractView {
         System.out.println("Année : ");
         int annee = Integer.parseInt(sc.nextLine());
         LocalDate dateCourse = LocalDate.of(annee, mois, jour);
-        System.out.println("Km de la course : ");
-        int km = Integer.parseInt(sc.nextLine());
+        int km;
+        do {
+            System.out.println("Km de la course : ");
+            km = Integer.parseInt(sc.nextLine());
+            if (km < 0) {
+                System.err.println("Km doit être >= à 0");
+            }
+        } while (km < 0);
         Course c = courseController.addCourse(new Course(0, nom, priceMoney, dateCourse, km));
         if (c != null) {
             affMsg("création de : " + c);
@@ -101,10 +118,27 @@ public class CourseViewConsole extends CourseAbstractView {
         int n = choixElt(lc);
         Course c = lc.get(n - 1);
         String nom = modifyIfNotBlank("Nom de la course : ", c.getNom());
-        BigDecimal priceMoney = new BigDecimal(modifyIfNotBlank("PriceMoney de la couse : ", "" + c.getPriceMoney()));
+        BigDecimal priceMoney = null;
+        do {
+            try {
+                priceMoney = new BigDecimal(modifyIfNotBlank("PriceMoney de la couse : ", "" + c.getPriceMoney()));
+                if (priceMoney.compareTo(BigDecimal.ZERO) < 0) {
+                    System.err.println("PriceMoney doit etre >= à 0");
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("entrée invalide");
+                priceMoney = null;
+            }
+        } while (priceMoney == null || priceMoney.compareTo(BigDecimal.ZERO) < 0);
         String date = modifyIfNotBlank("Date de la course :  ", c.getDateCourse() + "");
         LocalDate dateCourse = !date.equals("null") ? LocalDate.parse(date) : null;
-        int km = Integer.parseInt(modifyIfNotBlank("Km : ", "" + c.getKm()));
+        int km;
+        do {
+            km = Integer.parseInt(modifyIfNotBlank("Km : ", "" + c.getKm()));
+            if (km < 0) {
+                System.err.println("Km doit etre >= à 0");
+            }
+        } while (km < 0);
         Course maj = courseController.update(new Course(c.getIdCourse(), nom, priceMoney, dateCourse, km));
         if (maj != null) {
             affMsg("mise à jour effectuée : " + maj);
@@ -163,7 +197,7 @@ public class CourseViewConsole extends CourseAbstractView {
         if (t.equals(BigDecimal.ZERO)) {
             System.out.println("Aucun gain total pour la course : " + c.getNom() + "\n");
         } else {
-            System.out.println("La course du " + c.getNom() + " a pour gain total : " + t + "\n");
+            System.out.println("La course du " + c.getNom() + " a pour gain total : " + t + "€\n");
         }
     }
 
@@ -242,7 +276,7 @@ public class CourseViewConsole extends CourseAbstractView {
         if (liste.isEmpty()) {
             System.out.println("La liste est null\n");
         } else {
-            System.out.println("Liste des pilotes pour le pays " + c.getVille().getPays().getNom() + " de la course " + c.getNom() + " : ");
+            System.out.println("Liste des pilotes pour le pays de la course " + c.getNom() + " : ");
             System.out.println(liste + "\n");
         }
     }
