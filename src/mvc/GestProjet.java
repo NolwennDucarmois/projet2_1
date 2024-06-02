@@ -13,6 +13,7 @@ import java.util.List;
 
 public class GestProjet {
     private DAOCourse cm;
+    private DAOCourse cmh;
     private DAOPilote pm;
     private DAOPays pam;
     private DAOPays pamh;
@@ -29,10 +30,13 @@ public class GestProjet {
     private VilleAbstractView vv;
 
     public void gestion() {
-        cm = new ModelCourseDB();
+        cmh = new ModelCourseDBHyb();
+        //cm = new ModelCourseDB();
         cv = new CourseViewConsole();
-        cc = new CourseController(cm, cv);
-        cm.addObserver(cv);
+        //cc = new CourseController(cm, cv);
+        cc = new CourseController(cmh, cv);
+        cmh.addObserver(cv);
+        //cm.addObserver(cv);
 
         pm = new ModelPiloteDB();
         pv = new PiloteViewConsole();
