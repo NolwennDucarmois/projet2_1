@@ -127,7 +127,7 @@ public class PaysViewConsole extends PaysAbstractView {
             System.out.println("La liste est null\n");
         } else {
             System.out.println("Liste des pilotes du pays " + pays.getNom() + " : ");
-            System.out.println(liste);
+            System.out.println(liste + "\n");
         }
     }
 }

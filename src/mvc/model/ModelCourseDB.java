@@ -2,7 +2,6 @@ package mvc.model;
 
 import automobile.metier.*;
 import myconnections.DBConnection;
-import oracle.jdbc.proxy.annotation.Pre;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -237,7 +236,7 @@ public class ModelCourseDB extends DAOCourse {
             pstm.setInt(2, course.getIdCourse());
             ResultSet rs1 = pstm.executeQuery();
             if (rs1.next()) {
-                System.out.println("La pilote est déjà enregistré dans la course\n");
+                System.err.println("La pilote est déjà enregistré dans la course\n");
                 return false;
             } else {
                 pstm1.setInt(1, 0);
@@ -287,34 +286,41 @@ public class ModelCourseDB extends DAOCourse {
     }
 
     @Override
-    public Classement resultat(Course c, Pilote pi, int place, BigDecimal gain) {
+    public boolean resultat(Course c, Pilote pi, int place, BigDecimal gain) {
         String query1 = "select * from apiclassement where idPilote = ? and idCourse = ?";
-        String query2 = "insert into apiclassement(place, gain, idpilote, idcourse) values (?,?,?,?)";
+        String query2 = "select * from apiclassement where idCourse = ? and place = ?";
+        String query3 = "update apiclassement set place = ?, gain = ? where idPilote = ? and idCourse = ?";
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
-             PreparedStatement pstm2 = dbConnect.prepareStatement(query2)
-        ) {
+             PreparedStatement pstm2 = dbConnect.prepareStatement(query2);
+             PreparedStatement pstm3 = dbConnect.prepareStatement(query3)) {
             pstm1.setInt(1, pi.getIdPilote());
             pstm1.setInt(2, c.getIdCourse());
-            ResultSet rs = pstm1.executeQuery();
-            if (rs.next()) {
-                pstm2.setInt(1, place);
-                pstm2.setBigDecimal(2, gain);
-                pstm2.setInt(3, pi.getIdPilote());
-                pstm2.setInt(4, c.getIdCourse());
-                int n = pstm2.executeUpdate();
-                if (n == 1) {
-                    return new Classement(place, gain, pi);
-                } else {
-                    System.err.println("record introuvable");
-                    return null;
-                }
+            ResultSet rs1 = pstm1.executeQuery();
+            if (!rs1.next()) {
+                System.err.println("Le pilote n'est pas inscrit pour cette course");
+                return false;
+            }
+            pstm2.setInt(1, c.getIdCourse());
+            pstm2.setInt(2, place);
+            ResultSet rs2 = pstm2.executeQuery();
+            if (rs2.next()) {
+                System.err.println("La place " + place + " est déjà prise pour cette course");
+                return false;
+            }
+            pstm3.setInt(1, place);
+            pstm3.setBigDecimal(2, gain);
+            pstm3.setInt(3, pi.getIdPilote());
+            pstm3.setInt(4, c.getIdCourse());
+            int n = pstm3.executeUpdate();
+            if (n != 0) {
+                return true;
             } else {
-                System.err.println("Le pilote n'est pas inscrit pour cette course\n");
-                return null;
+                System.err.println("Erreur lors de la mise à jour du classement");
+                return false;
             }
         } catch (SQLException e) {
             System.err.println("erreur sql : " + e);
-            return null;
+            return false;
         }
     }
 
@@ -414,6 +420,29 @@ public class ModelCourseDB extends DAOCourse {
         } catch (SQLException e) {
             System.err.println("erreur sql : " + e);
             return false;
+        }
+    }
+
+    @Override
+    public List<Pilote> getPilotesCourse(Course course) {
+        List<Pilote> liste = new ArrayList<>();
+        String query = "select pi.idPilote, pi.matricule, pi.nom, pi.prenom, pi.dateNaiss from apiclassement cl join apipilote pi on cl.idpilote = pi.idpilote where cl.idcourse = ?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
+            pstm.setInt(1, course.getIdCourse());
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                int idPilote = rs.getInt("idPilote");
+                String matricule = rs.getString("matricule");
+                String nom = rs.getString("nom");
+                String prenom = rs.getString("prenom");
+                LocalDate dateNaiss = rs.getDate("dateNaiss").toLocalDate();
+                Pilote pilote = new Pilote(idPilote, matricule, nom, prenom, dateNaiss);
+                liste.add(pilote);
+            }
+            return liste;
+        } catch (SQLException e) {
+            System.err.println("erreur sql : " + e);
+            return null;
         }
     }
 

@@ -61,7 +61,7 @@ public class CourseController {
         return model.supPilote(c, pi);
     }
 
-    public Classement resultat(Course c, Pilote pi, int place, BigDecimal gain) {
+    public boolean resultat(Course c, Pilote pi, int place, BigDecimal gain) {
         return model.resultat(c, pi, place, gain);
     }
 
@@ -75,5 +75,8 @@ public class CourseController {
 
     public boolean classementComplet(Course course) {
         return model.classementComplet(course);
+    }
+    public List<Pilote> getPilotesCourse(Course course){
+        return model.getPilotesCourse(course);
     }
 }

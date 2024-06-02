@@ -234,7 +234,7 @@ public class CourseViewConsole extends CourseAbstractView {
 
     public void supPilote(Course c) {
         System.out.println("Pilote à supprimer de la course (indiquer le n° de la ligne): ");
-        Pilote p = pv.selectionner();
+        Pilote p = choixPilotes(c);
         boolean ok = courseController.supPilote(c, p);
         if (ok) {
             affMsg("pilote supprimé avec succès de la course\n");
@@ -244,13 +244,13 @@ public class CourseViewConsole extends CourseAbstractView {
     }
 
     public void resultat(Course c) {
-        Pilote p = pv.selectionner();
+        Pilote p = choixPilotes(c);
         System.out.println("Place : ");
         int place = lireInt();
         System.out.println("Gain : ");
         BigDecimal gain = sc.nextBigDecimal();
-        Classement cl = courseController.resultat(c, p, place, gain);
-        if (cl != null) {
+        boolean cl = courseController.resultat(c, p, place, gain);
+        if (cl) {
             affMsg("Ajout du résultat du pilote avec succès\n");
         } else {
             affMsg("Problème lors de l'enregistrement du résultat\n");
@@ -258,7 +258,7 @@ public class CourseViewConsole extends CourseAbstractView {
     }
 
     public void modif(Course c) {
-        Pilote p = pv.selectionner();
+        Pilote p = choixPilotes(c);
         System.out.println("Nouvelle place : ");
         int place = lireInt();
         System.out.println("Nouveau gain : ");
@@ -287,6 +287,19 @@ public class CourseViewConsole extends CourseAbstractView {
             affMsg("Tous les pilotes inscrits ont une place\n");
         } else {
             affMsg("Des pilotes n'ont pas de place encore\n");
+        }
+    }
+
+    public Pilote choixPilotes(Course course) {
+        System.out.println("Pilotes : ");
+        List<Pilote> liste = courseController.getPilotesCourse(course);
+        if (liste.isEmpty()) {
+            System.out.println("Aucun pilote dans la liste");
+            return null;
+        } else {
+            int n = choixListe(liste);
+            Pilote p = liste.get(n - 1);
+            return p;
         }
     }
 }
